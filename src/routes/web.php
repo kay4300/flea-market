@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\MakeProfileController;
 
 // 登録フォーム表示
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -15,7 +16,7 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/mailenable', fn() => view('auth.mailenable'))->name('mailenable');
 
 // ログイン画面
-Route::get('/login', [LoginController::class, 'create'])
+Route::get('/login', [LoginController::class, 'login'])
     ->name('login');
 
 // 認証メール誘導画面
@@ -31,6 +32,18 @@ Route::get('/verification', [MailController::class, 'showVerification'])
 // 6桁コード送信
 Route::post('/verification', [MailController::class, 'verifyCode'])
     ->middleware('auth');
+
+//ログアウト→ログイン画面に戻る
+Route::post('/logout', [MakeProfileController::class, 'logout'])
+    ->name('logout');
+// プロフィール更新
+Route::post('/makeprofile', [MakeProfileController::class, 'update'])
+    ->name('makeprofile');
+
+// 商品一覧ページ
+Route::get('/items', [ItemController::class, 'index'])
+    ->name('items.index');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
