@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\MakeProfileRequest;
 use App\Models\User;
+use App\Models\Profile;
 
 class MakeProfileController extends Controller
 {
@@ -28,7 +29,7 @@ class MakeProfileController extends Controller
             $user->profile_image = $filename;
         }
 
-        $user->save();
+        $profile->save();
 
         // 商品一覧ページへリダイレクト
         return redirect()->route('items.index');
