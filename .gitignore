@@ -1,5 +1,9 @@
 # Docker MySQL data（絶対にGit管理しない）
 docker/mysql/data/
+# MySQL 一時ファイル
+docker/mysql/data/#innodb_temp/
+docker/mysql/data/#ib_*
+
 
 # Laravel
 src/vendor/
@@ -9,3 +13,28 @@ src/storage/framework/
 
 # Environment
 .env
+docker/mysql/data/#innodb_temp/temp_10.ibt
+docker/mysql/data/#innodb_temp/temp_9.ibt
+docker/mysql/data/#innodb_temp/temp_8.ibt
+docker/mysql/data/#innodb_temp/temp_7.ibt
+docker/mysql/data/#innodb_temp/temp_6.ibt
+docker/mysql/data/#innodb_temp/temp_5.ibt
+docker/mysql/data/#innodb_temp/temp_4.ibt
+docker/mysql/data/#innodb_temp/temp_3.ibt
+docker/mysql/data/#innodb_temp/temp_2.ibt
+docker/mysql/data/#innodb_temp/temp_1.ibt
+docker/mysql/data/#innodb_temp/temp_2.ibt
+docker/mysql/data/undo_001
+docker/mysql/data/undo_002
+docker/mysql/data/server-key.pem
+docker/mysql/data/private_key.pem
+docker/mysql/data/mysql.ibd
+docker/mysql/data/ibtmp1
+docker/mysql/data/ibdata1
+docker/mysql/data/ib_logfile0
+docker/mysql/data/ib_buffer_pool
+docker/mysql/data/client-key.pem
+docker/mysql/data/ca-key.pem
+docker/mysql/data/binlog.index
+docker/mysql/data/binlog.000007
+docker/mysql/data/#ib_16384_0.dblwr
