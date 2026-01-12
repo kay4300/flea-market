@@ -1,0 +1,11 @@
+# Docker MySQL data（絶対にGit管理しない）
+docker/mysql/data/
+
+# Laravel
+src/vendor/
+src/storage/*.key
+src/storage/logs/
+src/storage/framework/
+
+# Environment
+.env

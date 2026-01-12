@@ -15,18 +15,28 @@ class MakeProfileController extends Controller
     {
         $user = Auth::user();
 
-        // フォームリクエストでバリデーション済みなのでここでは不要
-        $user->name = $request->name;
-        $user->postcode = $request->postcode;
-        $user->address = $request->address;
-        $user->building = $request->building;
+        // 既存プロフィールがあれば取得、なければ新規作成
+        $profile = Profile::firstOrNew([
+            'user_id' => $user->id,
+        ]);
 
+        $profile->user_id  = $user->id;
+        $profile->name     = $request->name;
+        $profile->postcode = $request->postcode;
+        $profile->address  = $request->address;
+        $profile->building = $request->building;
+
+       
         // 画像があれば保存
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/profile'), $filename);
-            $user->profile_image = $filename;
+            $image->storeAs('public/profile', $filename);
+
+            $profile->profile_image = $filename;
+
+            // $image->move(public_path('uploads/profile'), $filename);
+            // $user->profile_image = $filename;
         }
 
         $profile->save();

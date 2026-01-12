@@ -36,9 +36,29 @@ Route::post('/verification', [MailController::class, 'verifyCode'])
 //ログアウト→ログイン画面に戻る
 Route::post('/logout', [MakeProfileController::class, 'logout'])
     ->name('logout');
-// プロフィール更新
-Route::post('/makeprofile', [MakeProfileController::class, 'update'])
-    ->name('makeprofile');
+
+Route::middleware('auth')->group(
+    function () {
+
+        // プロフィール登録
+        Route::post('/makeprofile', [MakeProfileController::class, 'update'])
+        ->name('makeprofile');
+        // マイページ
+        Route::get('/mypage', function () {
+            return view('mypage');
+        })->name('mypage');
+
+        // 出品
+        Route::get('/sell', function () {
+            return view('sell');
+        })->name('sell');
+
+        // ログアウト
+        Route::post('/logout', [MakeProfileController::class, 'logout'])
+            ->name('logout');
+    }
+);
+
 
 // 商品一覧ページ
 Route::get('/items', [ItemController::class, 'index'])

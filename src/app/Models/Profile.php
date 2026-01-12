@@ -9,6 +9,16 @@ class Profile extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'name',
+        'postcode',
+        'address',
+        'building',
+        'profile_image',
+    ];
+
+
     public function user()
     {
         return $this->belongsTo(User::class);
