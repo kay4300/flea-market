@@ -31,7 +31,7 @@
     </div>
 
     <!-- プロフィール登録のルートに送信 enctype="multipart/form-data"は画像送信-->
-    <form class="form" method="POST" action="{{ route('makeprofile') }}" enctype="multipart/form-data">
+    <form class="form" method="POST" action="{{ route('makeprofile.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form__group">
             <div class="form__group-title">
@@ -39,7 +39,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__image-wrapper">
-                        <img src="{{ asset('storage/profile/' . $profile->profile_image) }}">
+                    <img src="{{ asset('storage/profile/' . $profile->profile_image) }}">
 
                     alt="プロフィール画像"
                     class="form__image-preview">
@@ -66,7 +66,9 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="name" placeholder="例：山田 太郎" value="{{ old('name') }}" />
+                    <!-- <input type="text" name="name" placeholder="例：山田 太郎" value="{{ old('name') }}" /> -->
+                    <input type="text" name="name" placeholder="例：山田 太郎" value="{{ auth()->user()->name }}" readonly>
+
                 </div>
                 <div class="form__error">
                     @error('name')

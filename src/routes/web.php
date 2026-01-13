@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MakeProfileController;
+use App\Http\Controllers\ProfileController;
 
 // 登録フォーム表示
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -40,9 +41,14 @@ Route::post('/logout', [MakeProfileController::class, 'logout'])
 Route::middleware('auth')->group(
     function () {
 
-        // プロフィール登録
-        Route::post('/makeprofile', [MakeProfileController::class, 'update'])
-        ->name('makeprofile');
+        // プロフィール登録・入力フォーム表示
+        Route::get('/makeprofile', [MakeProfileController::class, 'create'])->name('makeprofile.create');
+        // プロフィール初回登録・フォーム送信
+        Route::post('/makeprofile', [MakeProfileController::class, 'store'])->name('makeprofile.store');
+        // プロフィール編集・編集画面表示
+        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        // プロフィール画面・フォーム送信   
+        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
         // マイページ
         Route::get('/mypage', function () {
             return view('mypage');
@@ -63,6 +69,8 @@ Route::middleware('auth')->group(
 // 商品一覧ページ
 Route::get('/items', [ItemController::class, 'index'])
     ->name('items.index');
+
+
 
 /*
 |--------------------------------------------------------------------------

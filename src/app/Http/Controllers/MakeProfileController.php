@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\MakeProfileRequest;
 use App\Models\User;
 use App\Models\Profile;
@@ -14,6 +15,10 @@ class MakeProfileController extends Controller
     public function update(MakeProfileRequest $request)
     {
         $user = Auth::user();
+
+        // users テーブル更新
+        $user->name = $request->name;
+        $user->save();
 
         // 既存プロフィールがあれば取得、なければ新規作成
         $profile = Profile::firstOrNew([

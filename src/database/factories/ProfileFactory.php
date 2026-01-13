@@ -14,9 +14,10 @@ class ProfileFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
+            'name' => $this->faker->name,
             'postcode' => $this->faker->postcode(),
             'address' => $this->faker->address(),
-            'building' => $this->faker->secondaryAddress(),
+            'building' => $this->faker->optional()->secondaryAddress(),
             'profile_image' => null,
         ];
     }
