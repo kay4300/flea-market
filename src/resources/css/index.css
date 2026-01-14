@@ -1,0 +1,41 @@
+/* ヘッダー部分をここに記述する */
+
+/* 見出しタブ */
+.tab {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.tab__item {
+    font-size: 18px;
+    cursor: pointer;
+    color: #999;
+}
+
+.tab__item--active {
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+/* 商品一覧 */
+.item-list {
+    display: flex;
+    gap: 20px;
+}
+
+.item-card {
+    width: 30%;
+}
+
+.item-card__image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.item-card__name {
+    margin-top: 8px;
+    font-size: 14px;
+    text-align: center;
+}

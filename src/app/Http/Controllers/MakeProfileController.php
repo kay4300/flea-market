@@ -11,14 +11,27 @@ use App\Models\Profile;
 
 class MakeProfileController extends Controller
 {
-    // プロフィール更新
-    public function update(MakeProfileRequest $request)
+    // プロフィール編集画面表示
+    public function create()
     {
         $user = Auth::user();
 
-        // users テーブル更新
-        $user->name = $request->name;
-        $user->save();
+        // 既存プロフィールがあれば取得、なければ新規作成用の空オブジェクト
+        $profile = Profile::firstOrNew([
+            'user_id' => $user->id
+        ]);
+
+        return view('makeprofile', compact('profile'));
+    }
+    // プロフィール更新
+    public function store(MakeProfileRequest $request)
+    {
+        $user = Auth::user();
+        // dd($user);
+
+        // // users テーブル更新
+        // $user->name = $request->name;
+        // $user->save();
 
         // 既存プロフィールがあれば取得、なければ新規作成
         $profile = Profile::firstOrNew([
@@ -50,9 +63,9 @@ class MakeProfileController extends Controller
         return redirect()->route('items.index');
     }
 
+    // ログアウト処理
     public function logout(Request $request)
     {
-        // ログアウト処理
         Auth::logout();
 
         // invalidate()でセッションを無効化。regenerateToken()で@csrf対策。

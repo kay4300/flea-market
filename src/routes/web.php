@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MakeProfileController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ItemController;
 
 // 登録フォーム表示
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -16,9 +17,11 @@ Route::post('/register', [RegisterController::class, 'store']);
 // メール認証誘導画面へ遷移
 Route::get('/mailenable', fn() => view('auth.mailenable'))->name('mailenable');
 
+
+// ログインフォーム表示
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 // ログイン画面
-Route::get('/login', [LoginController::class, 'login'])
-    ->name('login');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 // 認証メール誘導画面
 Route::get('/mailenable', [MailController::class, 'showMailEnable'])
@@ -34,10 +37,7 @@ Route::get('/verification', [MailController::class, 'showVerification'])
 Route::post('/verification', [MailController::class, 'verifyCode'])
     ->middleware('auth');
 
-//ログアウト→ログイン画面に戻る
-Route::post('/logout', [MakeProfileController::class, 'logout'])
-    ->name('logout');
-
+// 認証済みユーザーのみ
 Route::middleware('auth')->group(
     function () {
 
@@ -65,12 +65,16 @@ Route::middleware('auth')->group(
     }
 );
 
+// 商品一覧ページ(ログイン後)
+Route::get('/items', function () {
+    return view('index');})->name('items.index');
 
-// 商品一覧ページ
+    // 商品一覧ページ（ログイン後）
 Route::get('/items', [ItemController::class, 'index'])
     ->name('items.index');
-
-
+// 商品詳細画面
+Route::get('/items/{id}', [ItemController::class, 'show'])
+    ->name('items.show');
 
 /*
 |--------------------------------------------------------------------------
