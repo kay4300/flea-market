@@ -3,7 +3,7 @@
 @section('title', 'Flea Market')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/content.css') }}">
+<link rel="stylesheet" href="{{ asset('css/content2.css') }}">
 @endsection
 
 @section('content')
@@ -16,13 +16,15 @@
             class="header__search"
             placeholder="何をお探しですか？">
     </div>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">ログアウト</button>
-    </form>
 
-    <a href="{{ route('mypage') }}">マイページ</a>
-    <a href="{{ route('sell') }}">出品</a>
+    {{-- ログイン画面へ --}}
+    <a href="{{ route('login') }}" class="header__login">
+        ログイン
+    </a>
+
+    {{-- 未ログイン用リンク --}}
+    <a href="#" onclick="showLoginModal()">マイページ</a>
+    <a href="#" onclick="showLoginModal()">出品</a>
 </header>
 
 <div class="product-detail">
@@ -62,8 +64,10 @@
             </div>
         </div>
 
-        <!-- 購入ボタン -->
-        <button class="purchase-button">購入手続きへ</button>
+        <!-- 購入ボタン（未ログイン） -->
+        <button class="purchase-button" onclick="showLoginModal()">
+            購入手続きへ
+        </button>
 
         <!-- 商品説明 -->
         <h2 class="section-title">商品説明</h2>
@@ -114,21 +118,38 @@
         </div>
         @endforeach
 
-        <!-- コメント投稿 -->
+        <!-- コメント投稿（未ログイン） -->
         <h2 class="section-title">商品へのコメント</h2>
 
-        <form method="POST" action="#">
-            @csrf
-            <textarea
-                name="comment"
-                maxlength="120"
-                placeholder="120文字以内で入力してください"
-                class="comment-textarea"></textarea>
+        <textarea
+            maxlength="120"
+            placeholder="ログインしてください"
+            class="comment-textarea"
+            disabled></textarea>
 
-            <button type="submit" class="comment-submit">
-                コメントを送信する
-            </button>
-        </form>
+        <button class="comment-submit" onclick="showLoginModal()">
+            コメントを送信する
+        </button>
 
     </div>
 </div>
+
+{{-- モーダルウィンドウ --}}
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <p class="modal-text">ログインしてください</p>
+        <button class="modal-close" onclick="closeModal()">閉じる</button>
+    </div>
+</div>
+
+<script>
+    function showLoginModal() {
+        document.getElementById('loginModal').style.display = 'block';
+    }
+
+    function closeModal() {
+        document.getElementById('loginModal').style.display = 'none';
+    }
+</script>
+
+@endsection
