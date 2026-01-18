@@ -76,6 +76,10 @@ Route::get('/items', [ItemController::class, 'index'])
 Route::get('/items/{id}', [ItemController::class, 'show'])
     ->name('items.show');
 
+    // 未ログイン画面からコメント送信したときのエラー処理
+Route::post('/content2', [ItemController::class, 'store'])
+    ->middleware('auth');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

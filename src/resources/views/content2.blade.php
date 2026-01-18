@@ -122,7 +122,7 @@
         <h2 class="section-title">商品へのコメント</h2>
 
         <textarea
-            maxlength="120"
+            maxlength="255"
             placeholder="ログインしてください"
             class="comment-textarea"
             disabled></textarea>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\MakeProfileRequest;
 use App\Models\User;
 use App\Models\Profile;
@@ -74,6 +75,45 @@ class MakeProfileController extends Controller
 
         // ログイン画面へリダイレクト
         return redirect()->route('login');
+    }
+
+    // 編集画面表示
+    public function edit()
+    {
+        return view('profile.edit', [
+            'profile' => Auth::user(),
+        ]);
+    }
+
+    // 更新処理
+    public function update(MakeProfileRequest $request)
+    {
+        $user = Auth::user();
+
+        // 画像がアップロードされた場合
+        if ($request->hasFile('profile_image')) {
+
+            // 既存画像削除
+            if ($user->profile_image) {
+                Storage::disk('public')->delete($user->profile_image);
+            }
+
+            // 新しい画像保存
+            $path = $request->file('profile_image')->store('profiles', 'public');
+            $user->profile_image = $path;
+        }
+
+        // 他のプロフィール項目更新
+        $user->name = $request->name;
+        $user->postcode = $request->postcode;
+        $user->address = $request->address;
+        $user->building = $request->building;
+
+        $user->save();
+
+        return redirect()
+            ->route('profile.edit')
+            ->with('success', 'プロフィールを更新しました。');
     }
 }
     //

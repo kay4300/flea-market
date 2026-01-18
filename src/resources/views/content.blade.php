@@ -121,9 +121,15 @@
             @csrf
             <textarea
                 name="comment"
-                maxlength="120"
-                placeholder="120文字以内で入力してください"
-                class="comment-textarea"></textarea>
+                maxlength="255"
+                placeholder="255文字以内で入力してください"
+                class="comment-textarea">
+            </textarea>
+            <div class="form__error">
+                @error('comment')
+                {{ $message }}
+                @enderror
+            </div>
 
             <button type="submit" class="comment-submit">
                 コメントを送信する

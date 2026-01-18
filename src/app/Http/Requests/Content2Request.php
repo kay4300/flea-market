@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends FormRequest
+class Content2Request extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,18 +24,15 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            //
-            'email' => 'required|string|email|max:255',
-            'password' => 'required|string|min:8',
-            ];
+            'comment' => 'required|string|max:255',
+        ];
     }
 
     public function messages()
     {
         return [
-            'email.required' => 'メールアドレスを入力してください',
-            'email.email' => '有効なメールアドレスを入力してください',
-            'password.required' => 'パスワードを入力してください',
-        ];
+            'comment.required' => 'コメントを入力してください。',
+            'comment.max' => '255文字以内で入力してください。',
+        ];    
     }
-}
+}     

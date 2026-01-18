@@ -52,7 +52,7 @@
                     </label>
                 </div>
                 <div class="form__error">
-                    @error('image')
+                    @error('profile_image')
                     {{ $message }}
                     @enderror
                 </div>
@@ -81,7 +81,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="postcode" placeholder="例 111-1111" value="{{ old('postcode, $profile->postcode') }}" />
+                    <input type="text" name="postcode" placeholder="例 111-1111" value="{{ old('postcode', $profile->postcode) }}" />
                 </div>
                 <div class="form__error">
                     @error('postcode')
@@ -97,7 +97,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="address" placeholder="東京都渋谷区渋谷1-1-1" value="{{ old('address, $profile->address') }}" />
+                    <input type="text" name="address" placeholder="東京都渋谷区渋谷1-1-1" value="{{ old('address', $profile->address) }}" />
                 </div>
                 <div class="form__error">
                     @error('address')
@@ -113,7 +113,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="building" value="{{ old('building, $profile->building') }}" />
+                    <input type="text" name="building" value="{{ old('building', $profile->building) }}" />
                 </div>
                 <div class="form__error">
                     @error('building')
