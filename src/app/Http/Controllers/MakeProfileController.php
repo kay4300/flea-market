@@ -45,7 +45,7 @@ class MakeProfileController extends Controller
         $profile->address  = $request->address;
         $profile->building = $request->building;
 
-       
+
         // 画像があれば保存
         if ($request->hasFile('image')) {
             $image = $request->file('image');
