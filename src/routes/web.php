@@ -13,6 +13,10 @@ Route::get('/register', [RegisterController::class, 'create'])->name('register')
 
 // 登録処理。バリデーション → ユーザー作成 → ログイン → mailenable へリダイレクト
 Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/mailenable', function () {
+    return view('mailenable');
+})->name('mailenable');
+
 
 // メール認証誘導画面へ遷移
 Route::get('/mailenable', fn() => view('auth.mailenable'))->name('mailenable');
@@ -46,9 +50,9 @@ Route::middleware('auth')->group(
         // プロフィール初回登録・フォーム送信
         Route::post('/makeprofile', [MakeProfileController::class, 'store'])->name('makeprofile.store');
         // プロフィール編集・編集画面表示
-        Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+        Route::get('/profile/edit', [MakeProfileController::class, 'edit'])->name('profile.edit');
         // プロフィール画面・フォーム送信   
-        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::put('/profile', [MakeProfileController::class, 'update'])->name('profile.update');
         // マイページ
         Route::get('/mypage', function () {
             return view('mypage');
@@ -80,6 +84,8 @@ Route::get('/items/{id}', [ItemController::class, 'show'])
 Route::post('/content2', [ItemController::class, 'store'])
     ->middleware('auth');
 
+Route::get('/', [ItemController::class, 'index'])->name('items.index');
+Route::get('/', [ItemController::class, 'index'])->name('top');
 /*
 |--------------------------------------------------------------------------
 | Web Routes

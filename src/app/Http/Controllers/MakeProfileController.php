@@ -35,30 +35,24 @@ class MakeProfileController extends Controller
         // $user->save();
 
         // 既存プロフィールがあれば取得、なければ新規作成
-        $profile = Profile::firstOrNew([
+        $profile = Profile::create([
             'user_id' => $user->id,
+            'name'     => $request->name,
+            'postcode' => $request->postcode,
+            'address'  => $request->address,
+            'building' => $request->building,
         ]);
 
-        $profile->user_id  = $user->id;
-        $profile->name     = $request->name;
-        $profile->postcode = $request->postcode;
-        $profile->address  = $request->address;
-        $profile->building = $request->building;
-
-
         // 画像があれば保存
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('public/profile', $filename);
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profiles', 'public');
+            $profile->profile_image = $path;
+            $profile->save();
 
-            $profile->profile_image = $filename;
 
             // $image->move(public_path('uploads/profile'), $filename);
             // $user->profile_image = $filename;
         }
-
-        $profile->save();
 
         // 商品一覧ページへリダイレクト
         return redirect()->route('items.index');
@@ -86,34 +80,54 @@ class MakeProfileController extends Controller
     }
 
     // 更新処理
+    // public function update(MakeProfileRequest $request)
+    // {
+    //     $user = Auth::user();
+
+    //     // 画像がアップロードされた場合
+    //     if ($request->hasFile('profile_image')) {
+
+    //         // 既存画像削除
+    //         if ($user->profile_image) {
+    //             Storage::disk('public')->delete($user->profile_image);
+    //         }
+
+    //         // 新しい画像保存
+    //         $path = $request->file('profile_image')->store('profiles', 'public');
+    //         $user->profile_image = $path;
+    //     }
+
+    //     // 他のプロフィール項目更新
+    //     $profile->name = $request->name;
+    //     $profile->postcode = $request->postcode;
+    //     $profile->address = $request->address;
+    //     $profile->building = $request->building;
+
+    //     $profile->save();
     public function update(MakeProfileRequest $request)
     {
         $user = Auth::user();
 
+        $profile = Profile::where(
+            'user_id', $user->id)->firstOrFail();
         // 画像がアップロードされた場合
         if ($request->hasFile('profile_image')) {
-
-            // 既存画像削除
-            if ($user->profile_image) {
-                Storage::disk('public')->delete($user->profile_image);
+            if ($profile->profile_image) {
+                Storage::disk('public')->delete($profile->profile_image);
             }
 
-            // 新しい画像保存
-            $path = $request->file('profile_image')->store('profiles', 'public');
-            $user->profile_image = $path;
+            $path = $request->file('profile_image')->store('profile', 'public');
+            $profile->profile_image = $path;
         }
 
-        // 他のプロフィール項目更新
-        $user->name = $request->name;
-        $user->postcode = $request->postcode;
-        $user->address = $request->address;
-        $user->building = $request->building;
-
-        $user->save();
-
-        return redirect()
-            ->route('profile.edit')
-            ->with('success', 'プロフィールを更新しました。');
+        $profile->update([
+            'name'     => $request->name,
+            'postcode' => $request->postcode,
+            'address'  => $request->address,
+            'building' => $request->building,
+        ]);
+            return redirect()
+                ->route('profile.edit')
+                ->with('success', 'プロフィールを更新しました。');
     }
 }
-    //

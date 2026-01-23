@@ -10,11 +10,12 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
+    // ログイン前、トップ画面
     public function index()
     {
         $items = Item::latest()->take(3)->get(); // 3件表示
 
-        return view('index', compact('items'));
+        return view('fleamarket', compact('items'));
     }
 
     public function show($id)
@@ -35,5 +36,6 @@ class ItemController extends Controller
         // コメント保存
     }
 
-    //
 }
+
+
