@@ -9,17 +9,24 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 
 // 登録フォーム表示
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
+Route::get('/register', function () {
+    return view('register');
+})->middleware('guest')->name('register');
 
-// 登録処理。バリデーション → ユーザー作成 → ログイン → mailenable へリダイレクト
-Route::post('/register', [RegisterController::class, 'store']);
+// Route::get('/register', [RegisterController::class, 'create'])->name('register');
+
+// // 登録処理。バリデーション → ユーザー作成 → ログイン → mailenable へリダイレクト
 Route::get('/mailenable', function () {
-    return view('mailenable');
-})->name('mailenable');
+    return view('mailenable'); // or auth.mailenable
+})->middleware('auth')->name('mail.enable');
+// Route::post('/register', [RegisterController::class, 'store']);
+// Route::get('/mailenable', function () {
+//     return view('mailenable');
+// })->name('mailenable');
 
 
-// メール認証誘導画面へ遷移
-Route::get('/mailenable', fn() => view('auth.mailenable'))->name('mailenable');
+// // メール認証誘導画面へ遷移
+// Route::get('/mailenable', fn() => view('auth.mailenable'))->name('mailenable');
 
 
 // ログインフォーム表示

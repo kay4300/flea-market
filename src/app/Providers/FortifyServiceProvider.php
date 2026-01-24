@@ -39,6 +39,12 @@ class FortifyServiceProvider extends ServiceProvider
         return view('mailenable'); // mailenable.blade.php
      });
 
+        // 登録後のリダイレクト先
+        Fortify::afterCreating(function ($user) {
+            return redirect()->route('mailenable');
+        });
+
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 

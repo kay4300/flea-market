@@ -109,7 +109,9 @@ class MakeProfileController extends Controller
         $user = Auth::user();
 
         $profile = Profile::where(
-            'user_id', $user->id)->firstOrFail();
+            'user_id',
+            $user->id
+        )->firstOrFail();
         // 画像がアップロードされた場合
         if ($request->hasFile('profile_image')) {
             if ($profile->profile_image) {
@@ -126,8 +128,8 @@ class MakeProfileController extends Controller
             'address'  => $request->address,
             'building' => $request->building,
         ]);
-            return redirect()
-                ->route('profile.edit')
-                ->with('success', 'プロフィールを更新しました。');
+        return redirect()
+            ->route('profile.edit')
+            ->with('success', 'プロフィールを更新しました。');
     }
 }
