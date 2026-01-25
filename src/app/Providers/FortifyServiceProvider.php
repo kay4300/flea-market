@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
+use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Features;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -21,6 +22,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+
         //
     }
 
@@ -34,19 +36,28 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
 
-        // メール認証ビューを指定
-        Fortify::verifyEmailView(function () {
-        return view('mailenable'); // mailenable.blade.php
-     });
-
-        // 登録後のリダイレクト先
-        Fortify::afterCreating(function ($user) {
-            return redirect()->route('mailenable');
+        // 登録画面
+        Fortify::registerView(function () {
+            return view('register');
         });
 
+        // メール認証画面
+        Fortify::verifyEmailView(function () {
+            return view('mailenable');
+        });
+
+        // 登録後メール認証誘導画面へリダイレクト
+        $this->app->singleton(RegisterResponse::class, function () {
+            return new class implements RegisterResponse {
+                public function toResponse($request)
+                {
+                    return redirect()->route('mailenable');
+                }
+            };
+        });
 
         RateLimiter::for('login', function (Request $request) {
-            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
+            $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())) . '|' . $request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
         });
@@ -55,6 +66,4 @@ class FortifyServiceProvider extends ServiceProvider
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
         });
     }
-
-    
 }

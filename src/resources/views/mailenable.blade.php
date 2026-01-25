@@ -16,7 +16,7 @@
     </p>
 
     <div class="verify__button-wrapper">
-        <a href="{{ route('makeprofile') }}" class="verify__button">
+        <a href="{{ route('verification.notice') }}" class="verify__button">
             認証はこちらから
         </a>
     </div>

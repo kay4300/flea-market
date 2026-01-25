@@ -18,7 +18,7 @@ Route::get('/register', function () {
 // // 登録処理。バリデーション → ユーザー作成 → ログイン → mailenable へリダイレクト
 Route::get('/mailenable', function () {
     return view('mailenable'); // or auth.mailenable
-})->middleware('auth')->name('mail.enable');
+})->name('mailenable');
 // Route::post('/register', [RegisterController::class, 'store']);
 // Route::get('/mailenable', function () {
 //     return view('mailenable');
@@ -35,17 +35,17 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 // 認証メール誘導画面
-Route::get('/mailenable', [MailController::class, 'showMailEnable'])
+Route::get('/mailenable', [RegisterController::class, 'showMailEnable'])
     ->middleware('auth')
     ->name('mailenable');
 
 // 6桁コード入力画面
-Route::get('/verification', [MailController::class, 'showVerification'])
+Route::get('/verification', [RegisterController::class, 'showVerification'])
     ->middleware('auth')
     ->name('verification');
 
 // 6桁コード送信
-Route::post('/verification', [MailController::class, 'verifyCode'])
+Route::post('/verification', [RegisterController::class, 'verifyCode'])
     ->middleware('auth');
 
 // 認証済みユーザーのみ
@@ -93,6 +93,13 @@ Route::post('/content2', [ItemController::class, 'store'])
 
 Route::get('/', [ItemController::class, 'index'])->name('items.index');
 Route::get('/', [ItemController::class, 'index'])->name('top');
+
+// Route::middleware(['web', 'guest'])->group(function () {
+//     Route::get('/register', [RegisterController::class, 'create'])->name('register');
+//     Route::post('/register', [RegisterController::class, 'store']);
+// });
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
