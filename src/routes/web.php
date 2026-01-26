@@ -8,6 +8,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\MakeProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\EmailVerifiedRedirectController;
 
 // 登録フォーム表示
 // Route::get('/register', function () {
@@ -31,6 +32,9 @@ Route::get('/mailenable', function () {
 Route::middleware('auth', 'verified')->group(
     function () {
 
+        // 「認証はこちらから」
+        Route::get('/verified/redirect', [EmailVerifiedRedirectController::class, 'redirect'])
+            ->name('verified.redirect');
         // プロフィール登録・入力フォーム表示
         Route::get('/makeprofile', [MakeProfileController::class, 'create'])->name('makeprofile.create');
         // プロフィール初回登録・フォーム送信
@@ -49,6 +53,13 @@ Route::middleware('auth', 'verified')->group(
             return view('sell');
         })->name('sell');
 
+        // 商品一覧ページ（ログイン後）
+        Route::get('/items', [ItemController::class, 'index'])
+            ->name('items.index');
+        // 商品詳細画面
+        Route::get('/items/{id}', [ItemController::class, 'show'])
+            ->name('items.show');
+
         // ログアウト
         Route::post('/logout', [MakeProfileController::class, 'logout'])
             ->name('logout');
@@ -57,16 +68,12 @@ Route::middleware('auth', 'verified')->group(
 
 // 商品一覧ページ(ログイン前)
 Route::get('/items', function () {
-    return view('index');})->name('items.index');
+    return view('index');
+})->name('items.index');
 
-    // 商品一覧ページ（ログイン後）
-Route::get('/items', [ItemController::class, 'index'])
-    ->name('items.index');
-// 商品詳細画面
-Route::get('/items/{id}', [ItemController::class, 'show'])
-    ->name('items.show');
 
-    // 未ログイン画面からコメント送信したときのエラー処理
+
+// 未ログイン画面からコメント送信したときのエラー処理
 Route::post('/content2', [ItemController::class, 'store'])
     ->middleware('auth');
 
