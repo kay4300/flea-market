@@ -10,6 +10,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+
 
 class RegisterController extends Controller
 {
@@ -32,6 +34,9 @@ class RegisterController extends Controller
         // 登録後ログイン
         Auth::login($user);
 
+        // メール認証のトリガー
+        event(new Registered($user));
+
         // メール認証ページへリダイレクト
         return redirect()->route('mailenable');
     }
@@ -51,7 +56,7 @@ class RegisterController extends Controller
             $request->session()->regenerate(); // セキュリティ用にセッション再生成
             return redirect()->route('items.index'); // index.blade.php に遷移
         }
-        
+
         // ログイン認証失敗
         return back()->withErrors([
             'email' => 'メールアドレスまたはパスワードが正しくありません。',

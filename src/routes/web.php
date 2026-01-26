@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
@@ -9,47 +10,25 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 
 // 登録フォーム表示
-Route::get('/register', function () {
-    return view('register');
-})->middleware('guest')->name('register');
+// Route::get('/register', function () {
+//     return view('register');
+// })->middleware('guest')->name('register');
 
-// Route::get('/register', [RegisterController::class, 'create'])->name('register');
-
-// // 登録処理。バリデーション → ユーザー作成 → ログイン → mailenable へリダイレクト
 Route::get('/mailenable', function () {
-    return view('mailenable'); // or auth.mailenable
-})->name('mailenable');
-// Route::post('/register', [RegisterController::class, 'store']);
-// Route::get('/mailenable', function () {
-//     return view('mailenable');
-// })->name('mailenable');
+    return view('mailenable');
+})->middleware('auth')->name('mailenable');
 
+// // 6桁コード入力画面
+// Route::get('/verification', [RegisterController::class, 'showVerification'])
+//     ->middleware('auth')
+//     ->name('verification');
 
-// // メール認証誘導画面へ遷移
-// Route::get('/mailenable', fn() => view('auth.mailenable'))->name('mailenable');
-
-
-// ログインフォーム表示
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-// ログイン画面
-Route::post('/login', [LoginController::class, 'login'])->name('login');
-
-// 認証メール誘導画面
-Route::get('/mailenable', [RegisterController::class, 'showMailEnable'])
-    ->middleware('auth')
-    ->name('mailenable');
-
-// 6桁コード入力画面
-Route::get('/verification', [RegisterController::class, 'showVerification'])
-    ->middleware('auth')
-    ->name('verification');
-
-// 6桁コード送信
-Route::post('/verification', [RegisterController::class, 'verifyCode'])
-    ->middleware('auth');
+// // 6桁コード送信
+// Route::post('/verification', [RegisterController::class, 'verifyCode'])
+//     ->middleware('auth');
 
 // 認証済みユーザーのみ
-Route::middleware('auth')->group(
+Route::middleware('auth', 'verified')->group(
     function () {
 
         // プロフィール登録・入力フォーム表示
@@ -76,7 +55,7 @@ Route::middleware('auth')->group(
     }
 );
 
-// 商品一覧ページ(ログイン後)
+// 商品一覧ページ(ログイン前)
 Route::get('/items', function () {
     return view('index');})->name('items.index');
 

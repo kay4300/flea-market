@@ -23,7 +23,14 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+
+               
+                // ここを変更: /login や /register 以外は HOME にリダイレクト
+                if ($request->is('login') || $request->is('register')) {
+                    return $next($request); // 何もしないでアクセスを許可
+                }
+
+                    return redirect(RouteServiceProvider::HOME);
             }
         }
 
