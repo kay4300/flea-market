@@ -1,20 +1,20 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\MakeProfileController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\EmailVerifiedRedirectController;
+use App\Models\Item;
 
 // 登録フォーム表示
 // Route::get('/register', function () {
 //     return view('register');
 // })->middleware('guest')->name('register');
 
+// メール認証画面
 Route::get('/mailenable', function () {
     return view('mailenable');
 })->middleware('auth')->name('mailenable');
@@ -52,33 +52,29 @@ Route::middleware('auth', 'verified')->group(
         Route::get('/sell', function () {
             return view('sell');
         })->name('sell');
-
-        // 商品一覧ページ（ログイン後）
-        Route::get('/items', [ItemController::class, 'index'])
-            ->name('items.index');
+    
         // 商品詳細画面
-        Route::get('/items/{id}', [ItemController::class, 'show'])
-            ->name('items.show');
+        Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
         // ログアウト
-        Route::post('/logout', [MakeProfileController::class, 'logout'])
-            ->name('logout');
+        Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');
     }
 );
 
-// 商品一覧ページ(ログイン前)
-Route::get('/items', function () {
-    return view('index');
-})->name('items.index');
+// トップページ（ログイン前・ログイン後共通）
+Route::get('/', [ItemController::class, 'index'])->name('top');
 
+Route::get('/index', function (Request $request) {
+    $tab = $request->query('tab', 'recommend');
+    $items = Item::latest()->take(3)->get();
+    return view('index', compact('items', 'tab'));
+})->name('index.afterlogin');
 
 
 // 未ログイン画面からコメント送信したときのエラー処理
 Route::post('/content2', [ItemController::class, 'store'])
     ->middleware('auth');
 
-Route::get('/', [ItemController::class, 'index'])->name('items.index');
-Route::get('/', [ItemController::class, 'index'])->name('top');
 
 // Route::middleware(['web', 'guest'])->group(function () {
 //     Route::get('/register', [RegisterController::class, 'create'])->name('register');
@@ -97,6 +93,3 @@ Route::get('/', [ItemController::class, 'index'])->name('top');
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});

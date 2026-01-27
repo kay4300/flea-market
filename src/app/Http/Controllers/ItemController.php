@@ -10,12 +10,28 @@ use App\Models\Item;
 
 class ItemController extends Controller
 {
-    // ログイン前、トップ画面
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::latest()->take(3)->get(); // 3件表示
+        // 未ログイン → ログイン前トップ
+        if (!Auth::check()) {
+            $items = Item::latest()->take(7)->get();
+            return view('fleamarket', compact('items'));
+        }
 
-        return view('fleamarket', compact('items'));
+        // ログイン済・未認証 → Fortifyの認証案内
+        if (! $request->user()->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
+
+        // ログイン済・認証済 → ログイン後トップ
+        $tab = $request->query('tab', 'recommend');
+
+        // // ログイン済・認証済 → ログイン後トップ
+        // $items = Item::latest()->take(3)->get();
+        // $tab = $request->query('tab', 'recommend'); // tabパラメータの取得
+
+        // return view('index', compact('items', 'tab'));
+        return redirect()->route('index.afterlogin', ['tab' => $tab]);
     }
 
     public function show($id)
@@ -35,7 +51,4 @@ class ItemController extends Controller
 
         // コメント保存
     }
-
 }
-
-

@@ -16,9 +16,10 @@
     </p>
 
     <div class="verify__button-wrapper">
-        <a href="{{ route('verification.notice') }}" class="verify__button">
-            認証はこちらから
-        </a>
+        <!-- <a href="{{ route('verification.notice') }}" class="verify__button"> -->
+            <a href="{{ route('top', ['tab' => 'mylist']) }}" class="verify__button">
+                認証はこちらから
+            </a>
     </div>
 
     <div class="verify__resend">
