@@ -13,9 +13,16 @@ class EmailVerifiedRedirectController extends Controller
     {
         $user = Auth::user();
 
+        // // プロフィールが存在すればトップページへ
+        // if ($user->profile) {
+        //     return redirect()->route('top');
+        // }
+
+        // // プロフィールがなければ作成ページへ
+        // return redirect()->route('makeprofile.create');
         // ① Eloquent（profilesテーブル）
         if ($user->profile) {
-            return redirect()->route('products.index');
+            return redirect()->route('index.afterlogin');
         }
 
         // ② create_profile_table を直接確認
@@ -24,7 +31,7 @@ class EmailVerifiedRedirectController extends Controller
             ->exists();
 
         if ($profileExists) {
-            return redirect()->route('products.index');
+            return redirect()->route('index.afterlogin');
         }
 
         // ③ どちらも無ければプロフィール作成

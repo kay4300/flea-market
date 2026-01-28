@@ -14,10 +14,24 @@ use App\Models\Item;
 //     return view('register');
 // })->middleware('guest')->name('register');
 
+// メール認証ルート
+// Auth::routes(['verify' => true]);
+
 // メール認証画面
 Route::get('/mailenable', function () {
     return view('mailenable');
 })->middleware('auth')->name('mailenable');
+
+// メール認証（ユーザーがメール内のリンクをクリックしたときの処理）
+Route::get('/email/verify/{id}/{hash}', function (Request $request) {
+    $request->fulfill();
+    // プロフィール登録画面へ
+    if (! $request->user()->profile) {
+        return redirect()->route('makeprofile.create');
+    }
+    // 登録済みならindexへ
+    return redirect()->route('index.afterlogin');
+})->middleware(['auth', 'signed'])->name('verification.verify');
 
 // // 6桁コード入力画面
 // Route::get('/verification', [RegisterController::class, 'showVerification'])
@@ -29,16 +43,46 @@ Route::get('/mailenable', function () {
 //     ->middleware('auth');
 
 // 認証済みユーザーのみ
-Route::middleware('auth', 'verified')->group(
+Route::middleware('auth')->group(
     function () {
 
         // 「認証はこちらから」
-        Route::get('/verified/redirect', [EmailVerifiedRedirectController::class, 'redirect'])
-            ->name('verified.redirect');
+        // Route::post('/verified/redirect', [EmailVerifiedRedirectController::class, 'redirect'])
+        //     ->name('verified.redirect');
+        Route::post('/verified/redirect', function (Request $request) {
+
+            $user = $request->user();
+
+            // ユーザーをメール認証済みにする
+            if (!$user->hasVerifiedEmail()) {
+                $user->markEmailAsVerified();
+            }
+
+            // Eager Load で profile を確認
+            $user->load('profile');
+
+            // プロフィール未登録なら makeprofile へ
+            if (!$user->profile) {
+                return redirect()->route('makeprofile.create');
+            }
+
+            // 登録済みなら index へ
+            return redirect()->route('index.afterlogin');
+        })->name('verified.redirect');
+
+        Route::get('/index', function () {
+            return view('index');
+        })->name('index.afterlogin');
+
         // プロフィール登録・入力フォーム表示
         Route::get('/makeprofile', [MakeProfileController::class, 'create'])->name('makeprofile.create');
         // プロフィール初回登録・フォーム送信
         Route::post('/makeprofile', [MakeProfileController::class, 'store'])->name('makeprofile.store');
+        // index 画面
+        Route::get('/index', function () {
+            return view('index');
+        })->name('index.afterlogin');
+
         // プロフィール編集・編集画面表示
         Route::get('/profile/edit', [MakeProfileController::class, 'edit'])->name('profile.edit');
         // プロフィール画面・フォーム送信   
@@ -52,7 +96,7 @@ Route::middleware('auth', 'verified')->group(
         Route::get('/sell', function () {
             return view('sell');
         })->name('sell');
-    
+
         // 商品詳細画面
         Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
 
@@ -92,4 +136,3 @@ Route::post('/content2', [ItemController::class, 'store'])
 | contains the "web" middleware group. Now create something great!
 |
 */
-

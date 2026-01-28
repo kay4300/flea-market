@@ -12,50 +12,41 @@ use App\Models\Profile;
 
 class MakeProfileController extends Controller
 {
-    // プロフィール編集画面表示
-    public function create()
-    {
-        $user = Auth::user();
+    // // プロフィール編集画面表示
+    // public function create()
+    // {
+    //     $user = Auth::user();
 
-        // 既存プロフィールがあれば取得、なければ新規作成用の空オブジェクト
-        $profile = Profile::firstOrNew([
-            'user_id' => $user->id
-        ]);
+    //     // 既存プロフィールがあれば取得、なければ新規作成用の空オブジェクト
+    //     $profile = Profile::firstOrNew([
+    //         'user_id' => $user->id
+    //     ]);
 
-        return view('makeprofile', compact('profile'));
-    }
+    //     return view('makeprofile', compact('profile'));
+    // }
     // プロフィール更新
     public function store(MakeProfileRequest $request)
     {
         $user = Auth::user();
         // dd($user);
-
-        // // users テーブル更新
-        // $user->name = $request->name;
-        // $user->save();
-
-        // 既存プロフィールがあれば取得、なければ新規作成
-        $profile = Profile::create([
-            'user_id' => $user->id,
-            'name'     => $request->name,
-            'postcode' => $request->postcode,
-            'address'  => $request->address,
-            'building' => $request->building,
-        ]);
+        // 既存プロフィールを取得、なければ新規作成
+        $profile = Profile::firstOrNew(['user_id' => $user->id]);
 
         // 画像があれば保存
         if ($request->hasFile('profile_image')) {
             $path = $request->file('profile_image')->store('profiles', 'public');
             $profile->profile_image = $path;
-            $profile->save();
+            }   
+        // 既存プロフィールがあれば取得、なければ新規作成
+            $profile->name     = $request->name;
+            $profile->postcode = $request->postcode;
+            $profile->address  = $request->address;
+            $profile->building = $request->building;
 
-
-            // $image->move(public_path('uploads/profile'), $filename);
-            // $user->profile_image = $filename;
-        }
+        $profile->save();
 
         // 商品一覧ページへリダイレクト
-        return redirect()->route('items.index');
+        return redirect()->route('index.afterlogin');
     }
 
     // ログアウト処理
@@ -75,35 +66,11 @@ class MakeProfileController extends Controller
     public function edit()
     {
         return view('profile.edit', [
-            'profile' => Auth::user(),
+            'profile' => Auth::user()->profile ?? new Profile(),
         ]);
     }
 
-    // 更新処理
-    // public function update(MakeProfileRequest $request)
-    // {
-    //     $user = Auth::user();
-
-    //     // 画像がアップロードされた場合
-    //     if ($request->hasFile('profile_image')) {
-
-    //         // 既存画像削除
-    //         if ($user->profile_image) {
-    //             Storage::disk('public')->delete($user->profile_image);
-    //         }
-
-    //         // 新しい画像保存
-    //         $path = $request->file('profile_image')->store('profiles', 'public');
-    //         $user->profile_image = $path;
-    //     }
-
-    //     // 他のプロフィール項目更新
-    //     $profile->name = $request->name;
-    //     $profile->postcode = $request->postcode;
-    //     $profile->address = $request->address;
-    //     $profile->building = $request->building;
-
-    //     $profile->save();
+    // プロフィール更新処理
     public function update(MakeProfileRequest $request)
     {
         $user = Auth::user();
