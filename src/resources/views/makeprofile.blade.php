@@ -40,7 +40,7 @@
             <div class="form__group-content">
                 <div class="form__image-wrapper">
                     <img src="{{ asset('storage/profile/' . $profile->profile_image) }}" alt="プロフィール画像"
-                    class="form__image-preview">
+                        class="form__image-preview">
                     <label class="form__image-button">
                         画像を選択する
                         <input

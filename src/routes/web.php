@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MakeProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\EmailVerifiedRedirectController;
+use App\Http\Controllers\MypageController;
 use App\Models\Item;
 
 // 登録フォーム表示
@@ -62,9 +63,14 @@ Route::middleware('auth')->group(
             $user->load('profile');
 
             // プロフィール未登録なら makeprofile へ
-            if (!$user->profile) {
-                return redirect()->route('makeprofile.create');
-            }
+            // if (!$user->profile) {
+            //     return redirect()->route('makeprofile.create');
+            // }
+
+            // 商品一覧（after login）
+            Route::get('/index', [ItemController::class, 'index'])
+                ->name('index.afterlogin')
+                ->middleware('profile.completed');
 
             // 登録済みなら index へ
             return redirect()->route('index.afterlogin');
@@ -87,10 +93,10 @@ Route::middleware('auth')->group(
         Route::get('/profile/edit', [MakeProfileController::class, 'edit'])->name('profile.edit');
         // プロフィール画面・フォーム送信   
         Route::put('/profile', [MakeProfileController::class, 'update'])->name('profile.update');
+
         // マイページ
-        Route::get('/mypage', function () {
-            return view('mypage');
-        })->name('mypage');
+        Route::get('/mypage', [MypageController::class, 'index'])
+        ->name('mypage');
 
         // 出品
         Route::get('/sell', function () {

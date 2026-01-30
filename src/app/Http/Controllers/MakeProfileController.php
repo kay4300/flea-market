@@ -85,7 +85,7 @@ class MakeProfileController extends Controller
                 Storage::disk('public')->delete($profile->profile_image);
             }
 
-            $path = $request->file('profile_image')->store('profile', 'public');
+            $path = $request->file('profile_image')->store('profiles', 'public');
             $profile->profile_image = $path;
         }
 
