@@ -60,34 +60,31 @@ Route::middleware('auth')->group(
             }
 
             // Eager Load で profile を確認
-            $user->load('profile');
+            // $user->load('profile');
 
             // プロフィール未登録なら makeprofile へ
-            // if (!$user->profile) {
-            //     return redirect()->route('makeprofile.create');
-            // }
-
-            // 商品一覧（after login）
-            Route::get('/index', [ItemController::class, 'index'])
-                ->name('index.afterlogin')
-                ->middleware('profile.completed');
+            if (!$user->profile) {
+                return redirect()->route('makeprofile.create');
+            }
+            // return redirect()->route('index.afterlogin');
 
             // 登録済みなら index へ
             return redirect()->route('index.afterlogin');
         })->name('verified.redirect');
 
-        Route::get('/index', function () {
-            return view('index');
-        })->name('index.afterlogin');
+        // 商品一覧（after login）
+        Route::get('/index', [ItemController::class, 'index'])
+            ->name('index.afterlogin')
+            ->middleware('auth', 'profile.completed');
 
         // プロフィール登録・入力フォーム表示
         Route::get('/makeprofile', [MakeProfileController::class, 'create'])->name('makeprofile.create');
         // プロフィール初回登録・フォーム送信
         Route::post('/makeprofile', [MakeProfileController::class, 'store'])->name('makeprofile.store');
         // index 画面
-        Route::get('/index', function () {
-            return view('index');
-        })->name('index.afterlogin');
+        // Route::get('/index', function () {
+        //     return view('index');
+        // })->name('index.afterlogin');
 
         // プロフィール編集・編集画面表示
         Route::get('/profile/edit', [MakeProfileController::class, 'edit'])->name('profile.edit');
@@ -96,7 +93,7 @@ Route::middleware('auth')->group(
 
         // マイページ
         Route::get('/mypage', [MypageController::class, 'index'])
-        ->name('mypage');
+            ->name('mypage');
 
         // 出品
         Route::get('/sell', function () {

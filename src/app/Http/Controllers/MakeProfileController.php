@@ -12,10 +12,12 @@ use App\Models\Profile;
 
 class MakeProfileController extends Controller
 {
-    // // プロフィール編集画面表示
-    // public function create()
-    // {
-    //     $user = Auth::user();
+    // プロフィール編集画面表示
+    public function create()
+    {
+        $profile = Auth::user()->profile ?? new Profile();
+        return view('makeprofile', compact('profile'));
+    }
 
     //     // 既存プロフィールがあれば取得、なければ新規作成用の空オブジェクト
     //     $profile = Profile::firstOrNew([
@@ -30,18 +32,21 @@ class MakeProfileController extends Controller
         $user = Auth::user();
         // dd($user);
         // 既存プロフィールを取得、なければ新規作成
-        $profile = Profile::firstOrNew(['user_id' => $user->id]);
+        // $profile = Profile::firstOrNew(['user_id' => $user->id]);
+
+        // 既存プロフィールがあれば取得、なければ新規作成
+        $profile = $user->profile ?? new Profile();
+        $profile->user_id = $user->id;
+        $profile->name     = $request->name;
+        $profile->postcode = $request->postcode;
+        $profile->address  = $request->address;
+        $profile->building = $request->building;
 
         // 画像があれば保存
         if ($request->hasFile('profile_image')) {
-            $path = $request->file('profile_image')->store('profiles', 'public');
-            $profile->profile_image = $path;
-            }   
-        // 既存プロフィールがあれば取得、なければ新規作成
-            $profile->name     = $request->name;
-            $profile->postcode = $request->postcode;
-            $profile->address  = $request->address;
-            $profile->building = $request->building;
+             $path= $request->file('profile_image')->store('profiles', 'public');
+             $profile->profile_image = $path;
+        }
 
         $profile->save();
 
@@ -65,9 +70,10 @@ class MakeProfileController extends Controller
     // 編集画面表示
     public function edit()
     {
-        return view('profile.edit', [
-            'profile' => Auth::user()->profile ?? new Profile(),
-        ]);
+        $profile = Auth::user()->profile ?? new Profile();
+        
+            return view('profile.edit', compact('profile'));
+        
     }
 
     // プロフィール更新処理

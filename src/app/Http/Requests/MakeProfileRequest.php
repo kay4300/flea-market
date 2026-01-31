@@ -13,7 +13,9 @@ class MakeProfileRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        // return true;
+        // 認証済みユーザーのみ許可
+        return auth()->check();
     }
 
     /**
