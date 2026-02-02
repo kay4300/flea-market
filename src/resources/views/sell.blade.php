@@ -151,7 +151,7 @@
             <div class="form__group-title">
                 <span class="form__label--item">販売価格</span>
             </div>
-            < class="form__group-content">
+            <div class="form__group-content">
                 <div class="form__input--text">
                     <input type="text" name="price" value="{{ old('price') }}" required>
                 </div>

@@ -19,7 +19,7 @@ class ItemFactory extends Factory
     {
         $products = [
             'ノートパソコン' => [
-                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg',
+                'image' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg',
                 'description' => '高機能なノートパソコンで仕事にも学習にも最適です。',
                 'brand' => 'Dell',
                 'price_options' => [50000, 100000, 150000],

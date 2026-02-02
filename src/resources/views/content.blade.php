@@ -98,7 +98,7 @@
         </div>
 
         <!-- コメント一覧 -->
-        <h2 class="section-title">コメント（{{ $item->comments->count() }}）</h2>
+        <h2 class="section-title">コメント({{ $item->comments->count() }})</h2>
 
         @foreach ($item->comments as $comment)
         <div class="comment">
