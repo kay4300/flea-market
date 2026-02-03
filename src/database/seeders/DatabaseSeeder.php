@@ -16,9 +16,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(
+        $this->call([
             ItemSeeder::class,
-        );
+            CommentSeeder::class,
+
+        ]);
         // \App\Models\User::factory(10)->create();
     }
 }
