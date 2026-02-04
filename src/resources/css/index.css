@@ -39,3 +39,13 @@
     font-size: 14px;
     text-align: center;
 }
+
+.tab-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pagination {
+    margin-left: auto;
+}

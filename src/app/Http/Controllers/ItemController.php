@@ -12,6 +12,7 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
+
         // 未ログイン → ログイン前トップ
         if (!Auth::check()) {
             $items = Item::latest()->take(7)->get();
@@ -31,12 +32,16 @@ class ItemController extends Controller
         // $tab = $request->query('tab', 'recommend'); // tabパラメータの取得
 
         // return view('index', compact('items', 'tab'));
-        return redirect()->route('index.afterlogin', ['tab' => $tab]);
+
+         return redirect()->route('index.afterlogin', ['items' => $tab]);
     }
 
-    public function show($id)
+    // 商品詳細画面
+    // URLの {item} と自動で紐づく
+    public function show(Item $item)
     {
-        $item = Item::findOrFail($id);
+        // eager loadingでcommentsとusersの情報をまとめて取得。$item->comments→ commentテーブルのデータ    
+        $item->load(['comments.user']);
 
         return view('content', compact('item'));
     }

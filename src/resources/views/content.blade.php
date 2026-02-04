@@ -31,7 +31,7 @@
     <div class="product-detail__left">
         <!-- 左上：商品画像 -->
         <div class="product-image">
-            <img src="{{ asset('storage/items/' . $item->image) }}" alt="{{ $item->name }}">
+            <img src="{{ $item->image }}" alt="{{ $item->name }}">
         </div>
 
         <!-- 左下：何も表示しない -->
@@ -99,7 +99,7 @@
 
         <!-- コメント一覧 -->
         <h2 class="section-title">コメント({{ $item->comments->count() }})</h2>
-
+        @if ($item->comments && $item->comments->count())
         @foreach ($item->comments as $comment)
         <div class="comment">
             <div class="comment-user">
@@ -113,7 +113,7 @@
             <p class="comment-text">{{ $comment->body }}</p>
         </div>
         @endforeach
-
+        @endif
         <!-- コメント投稿 -->
         <h2 class="section-title">商品へのコメント</h2>
 

@@ -100,13 +100,17 @@ Route::middleware('auth')->group(
             return view('sell');
         })->name('sell');
 
-        // 商品詳細画面
-        Route::get('/items/{id}', [ItemController::class, 'show'])->name('items.show');
-
+        
         // ログアウト
         Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');
+
+
     }
 );
+
+// 商品詳細画面
+Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
+
 
 // トップページ（ログイン前・ログイン後共通）
 Route::get('/', [ItemController::class, 'index'])->name('top');
