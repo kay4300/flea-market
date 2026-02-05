@@ -33,7 +33,7 @@ class ItemController extends Controller
 
         // return view('index', compact('items', 'tab'));
 
-         return redirect()->route('index.afterlogin', ['items' => $tab]);
+        return redirect()->route('index.afterlogin', ['items' => $tab]);
     }
 
     // 商品詳細画面
@@ -41,7 +41,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         // eager loadingでcommentsとusersの情報をまとめて取得。$item->comments→ commentテーブルのデータ    
-        $item->load(['comments.user']);
+        $item->load(['user', 'categories','comments.user']);
 
         return view('content', compact('item'));
     }

@@ -10,9 +10,22 @@ class Item extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        // DBのuser_idを参照
+        return $this->belongsTo(User::class);
+    }
+
     public function comments()
     {
+        // DBのitem_idを参照
         return $this->hasMany(Comment::class);
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
 }  
     

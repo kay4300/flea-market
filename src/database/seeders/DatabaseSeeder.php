@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
             CommentSeeder::class,
 
         ]);
+
+        $this->call([
+            CategorySeeder::class,
+        ]);
         // \App\Models\User::factory(10)->create();
     }
 }
