@@ -70,12 +70,8 @@
 
         <div class="product-info">
             <div class="info-row">
-                <span class="info-label">カラー</span>
-                <span class="info-value">{{ $item->color }}</span>
+                <span class="info-value">{{ $item->description }}</span>
             </div>
-
-            <p class="info-text">{{ $item->condition_description }}</p>
-            <p class="info-text">{{ $item->shipping_description }}</p>
         </div>
 
         <!-- 商品情報 -->
@@ -93,7 +89,7 @@
 
             <div class="info-row">
                 <span class="info-label">商品の状態</span>
-                <span class="info-value">{{ $item->status }}</span>
+                <span class="info-value">{{ $item->item_condition }}</span>
             </div>
         </div>
 

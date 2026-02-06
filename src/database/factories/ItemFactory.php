@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Category;
 
 
 class ItemFactory extends Factory
@@ -87,9 +88,21 @@ class ItemFactory extends Factory
                 '未使用に近い',
                 '目立った傷や汚れなし',
                 'やや傷や汚れあり',
-            'user_id' => User::first()->id,
             ]),
+            // 既存ユーザーに紐づける
+            'user_id' => User::first()->id,
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (Item $item) {
+            $categoryIds = Category::inRandomOrder()
+                ->take(rand(1, 3))   // ← 複数カテゴリ
+                ->pluck('id');
+
+            $item->categories()->attach($categoryIds);
+        });
     }
     //
 }
