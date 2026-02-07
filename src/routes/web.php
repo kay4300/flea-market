@@ -100,11 +100,9 @@ Route::middleware('auth')->group(
             return view('sell');
         })->name('sell');
 
-        
+
         // ログアウト
         Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');
-
-
     }
 );
 
