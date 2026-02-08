@@ -7,17 +7,37 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\Content2Request;
 use App\Models\Item;
+use App\Models\User;
 
 class ItemController extends Controller
 {
     public function index(Request $request)
     {
+        $tab = $request->query('tab', 'recommend'); // デフォルト: おすすめ
 
-        // 未ログイン → ログイン前トップ
         if (!Auth::check()) {
-            $items = Item::latest()->take(7)->get();
-            return view('fleamarket', compact('items'));
+            // 未ログイン → おすすめのみ表示
+            $items = Item::latest()->paginate(7);
+            return view('index', compact('items', 'tab'));
         }
+
+        // ログイン済み
+        if ($tab === 'recommend') {
+            $items = Item::latest()->paginate(7);
+        } elseif ($tab === 'wishlist') {
+            $user = Auth::user();
+            // いいねした商品のみ取得（pivotテーブルやlikesテーブル想定）
+            $items = $user->likedItems()->latest()->paginate(7);
+        } else {
+            $items = Item::latest()->paginate(7);
+        }
+
+        return view('index', compact('items', 'tab'));
+        // 未ログイン → ログイン前トップ
+        // if (!Auth::check()) {
+        //     $items = Item::latest()->paginate(7);
+        //     return view('fleamarket', compact('items'));
+        // }
 
         // ログイン済・未認証 → Fortifyの認証案内
         if (! $request->user()->hasVerifiedEmail()) {

@@ -16,7 +16,7 @@
             class="header__search"
             placeholder="何をお探しですか？">
     </div>
-    <form action="{{ route('login') }}" method="POST">
+    <form action="{{ route('login') }}" method="GET">
         @csrf
         <button type="submit">ログイン</button>
     </form>
@@ -44,4 +44,9 @@
         </a>
     </div>
     @endforeach
+
+<div class="pagination">
+    {{ $items->links() }}
+</div>
+
 </div>

@@ -8,6 +8,7 @@ use App\Http\Controllers\MakeProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\EmailVerifiedRedirectController;
 use App\Http\Controllers\MypageController;
+use App\Http\Controllers\LoginController;
 use App\Models\Item;
 
 // 登録フォーム表示
@@ -112,6 +113,8 @@ Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show')
 
 // トップページ（ログイン前・ログイン後共通）
 Route::get('/', [ItemController::class, 'index'])->name('top');
+// ログイン画面へ遷移
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
 Route::get('/index', function (Request $request) {
     $tab = $request->query('tab', 'recommend');
