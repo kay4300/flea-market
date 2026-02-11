@@ -27,8 +27,15 @@
 
 <!-- 見出し（おすすめ・マイリスト） -->
 <div class="tab">
-    <h2 class="tab__item tab__item--active">おすすめ</h2>
-    <h2 class="tab__item">マイリスト</h2>
+    <a href="{{ route('index.afterlogin', ['tab' => 'recommend']) }}"
+        class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">
+        おすすめ
+    </a>
+
+    <a href="{{ route('index.afterlogin', ['tab' => 'wishlist']) }}"
+        class="tab__item {{ request('tab') === 'wishlist' ? 'tab__item--active' : '' }}">
+        マイリスト
+    </a>
 </div>
 
 <!-- 商品一覧 -->
@@ -44,5 +51,8 @@
         </a>
     </div>
     @endforeach
+</div>
 
+<div class="pagination">
+    {{ $items->appends(['tab' => $tab])->links() }}
 </div>

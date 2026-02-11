@@ -40,12 +40,12 @@ class ItemController extends Controller
         // }
 
         // ログイン済・未認証 → Fortifyの認証案内
-        if (! $request->user()->hasVerifiedEmail()) {
-            return redirect()->route('verification.notice');
-        }
+        // if (! $request->user()->hasVerifiedEmail()) {
+        //     return redirect()->route('verification.notice');
+        // }
 
         // ログイン済・認証済 → ログイン後トップ
-        $tab = $request->query('tab', 'recommend');
+        // $tab = $request->query('tab', 'recommend');
 
         // // ログイン済・認証済 → ログイン後トップ
         // $items = Item::latest()->take(3)->get();
@@ -53,7 +53,7 @@ class ItemController extends Controller
 
         // return view('index', compact('items', 'tab'));
 
-        return redirect()->route('index.afterlogin', ['items' => $tab]);
+        // return redirect()->route('index.afterlogin', ['items' => $tab]);
     }
 
     // 商品詳細画面

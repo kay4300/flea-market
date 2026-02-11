@@ -35,15 +35,6 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     return redirect()->route('index.afterlogin');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-// // 6桁コード入力画面
-// Route::get('/verification', [RegisterController::class, 'showVerification'])
-//     ->middleware('auth')
-//     ->name('verification');
-
-// // 6桁コード送信
-// Route::post('/verification', [RegisterController::class, 'verifyCode'])
-//     ->middleware('auth');
-
 // 認証済みユーザーのみ
 Route::middleware('auth')->group(
     function () {
@@ -116,11 +107,11 @@ Route::get('/', [ItemController::class, 'index'])->name('top');
 // ログイン画面へ遷移
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
-Route::get('/index', function (Request $request) {
-    $tab = $request->query('tab', 'recommend');
-    $items = Item::latest()->take(3)->get();
-    return view('index', compact('items', 'tab'));
-})->name('index.afterlogin');
+// Route::get('/index', function (Request $request) {
+//     $tab = $request->query('tab', 'recommend');
+//     $items = Item::latest()->take(3)->get();
+//     return view('index', compact('items', 'tab'));
+// })->name('index.afterlogin');
 
 
 // 未ログイン画面からコメント送信したときのエラー処理
