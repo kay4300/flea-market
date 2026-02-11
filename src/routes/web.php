@@ -68,6 +68,13 @@ Route::middleware('auth')->group(
         Route::get('/index', [ItemController::class, 'index'])
             ->name('index.afterlogin')
             ->middleware('auth', 'profile.completed');
+        //いいね追加 
+        Route::post('/items/{item}/like', [ItemController::class, 'like'])
+            ->name('items.like');
+        // いいね削除
+        Route::delete('/items/{item}/unlike', [ItemController::class, 'unlike'])
+            ->name('items.unlike');
+
 
         // プロフィール登録・入力フォーム表示
         Route::get('/makeprofile', [MakeProfileController::class, 'create'])->name('makeprofile.create');

@@ -17,22 +17,45 @@ class ItemController extends Controller
 
         if (!Auth::check()) {
             // 未ログイン → おすすめのみ表示
-            $items = Item::latest()->paginate(7);
+            // $items = Item::latest()->paginate(7);
+            $items = Item::with('categories')->latest()->paginate(7);
             return view('index', compact('items', 'tab'));
         }
-
         // ログイン済み
-        if ($tab === 'recommend') {
-            $items = Item::latest()->paginate(7);
-        } elseif ($tab === 'wishlist') {
-            $user = Auth::user();
-            // いいねした商品のみ取得（pivotテーブルやlikesテーブル想定）
-            $items = $user->likedItems()->latest()->paginate(7);
+        if ($tab === 'wishlist') {
+
+            $items = Auth::user()
+                ->likedItems()
+                ->with('categories')
+                ->latest()
+                ->paginate(7);
         } else {
-            $items = Item::latest()->paginate(7);
+
+            // $items = Item::latest()->paginate(7);
+            $items = Item::with('categories')->latest()->paginate(7);
         }
 
         return view('index', compact('items', 'tab'));
+
+        // ログインしている場合のみ、いいね済みIDを取得
+        // $likedItemIds = Auth::check()
+        //     ? Auth::user()->likedItems()->pluck('items.id')->toArray()
+        //     : [];
+
+        // return view('index', compact('items', 'tab', 'likedItemIds'));
+
+        // ログイン済み
+        // if ($tab === 'recommend') {
+        //     $items = Item::latest()->paginate(7);
+        // } elseif ($tab === 'wishlist') {
+        //     $user = Auth::user();
+        //     // いいねした商品のみ取得（pivotテーブルやlikesテーブル想定）
+        //     $items = $user->likedItems()->latest()->paginate(7);
+        // } else {
+        //     $items = Item::latest()->paginate(7);
+        // }
+
+        // return view('index', compact('items', 'tab'));
         // 未ログイン → ログイン前トップ
         // if (!Auth::check()) {
         //     $items = Item::latest()->paginate(7);
@@ -55,6 +78,24 @@ class ItemController extends Controller
 
         // return redirect()->route('index.afterlogin', ['items' => $tab]);
     }
+    public function like(Item $item)
+    {
+        $user = Auth::user();
+
+        if (!$user->likedItems()->where('item_id', $item->id)->exists()) {
+            $user->likedItems()->attach($item->id);
+        }
+
+        return back();
+    }
+
+    public function unlike(Item $item)
+    {
+        $user = Auth::user();
+        $user->likedItems()->detach($item->id);
+
+        return back();
+    }
 
     // 商品詳細画面
     // URLの {item} と自動で紐づく
@@ -62,8 +103,16 @@ class ItemController extends Controller
     {
         // eager loadingでcommentsとusersの情報をまとめて取得。$item->comments→ commentテーブルのデータ    
         $item->load(['user', 'categories','comments.user']);
+        $item->loadCount('comments');
 
-        return view('content', compact('item'));
+        // ログインしている場合のみ、いいね済みか判定
+        $isLiked = Auth::check()
+            ? Auth::user()->likedItems()->where('item_id', $item->id)->exists()
+            : false;
+        // いいね数を取得
+        $likesCount = $item->likedUsers()->count();
+
+        return view('content', compact('item', 'isLiked', 'likesCount'));
     }
     // 未ログイン画面からコメント送信したときのエラー処理
     public function store(Content2Request $request)

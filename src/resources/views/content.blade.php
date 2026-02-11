@@ -52,8 +52,19 @@
         <!-- いいね・コメント -->
         <div class="reaction">
             <div class="reaction__item">
-                <span class="reaction__icon">♥</span>
-                <span class="reaction__count">{{ $item->likes_count }}</span>
+                <span class="reaction__count">{{ $likesCount }}</span>
+                @auth
+                <form action="{{ $isLiked ? route('items.unlike', $item->id) : route('items.like', $item->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @if($isLiked)
+                    @method('DELETE')
+                    <button type="submit">❤️</button>
+                    @else
+                    <button type="submit">❤️</button>
+                    @endif
+                </form>
+                @endauth
+
             </div>
 
             <div class="reaction__item">

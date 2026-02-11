@@ -24,7 +24,7 @@ class Item extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(Category::class, 'category_item', 'item_id', 'category_id');
     }
 
     public function likedUsers()
@@ -34,8 +34,10 @@ class Item extends Model
             'likes',
             'item_id',
             'user_id'
-        );
+        )->withTimestamps();
     }
+
+    
 }
 
 

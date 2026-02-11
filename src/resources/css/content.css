@@ -186,3 +186,22 @@
     margin-top: 15px;
     cursor: pointer;
 }
+
+.reaction__icon {
+    font-size: 24px;
+    /* ♥ のサイズ */
+    color: gray;
+    /* デフォルト色（未いいね） */
+    transition: color 0.3s;
+    /* 色変化をスムーズに */
+}
+
+.reaction__icon.liked {
+    color: red;
+    /* いいね済みは赤色 */
+}
+
+.reaction__count {
+    margin-left: 5px;
+    font-weight: bold;
+}
