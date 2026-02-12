@@ -33,12 +33,12 @@
         {{-- 商品情報 --}}
         <div class="product-row">
             <div class="product-image">
-                <img src="{{ asset('storage/' . $product->image_path) }}" alt="商品画像">
+                <img src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
             </div>
 
             <div class="product-detail">
-                <p class="product-name">{{ $product->name }}</p>
-                <p class="product-price">¥ {{ number_format($product->price) }}</p>
+                <p class="product-name">{{ $item->name }}</p>
+                <p class="product-price">¥ {{ number_format($item->price) }}</p>
             </div>
         </div>
 
@@ -77,7 +77,7 @@
 
             <div class="summary-row">
                 <span>商品代金</span>
-                <span>¥ {{ number_format($product->price) }}</span>
+                <span>¥ {{ number_format($item->price) }}</span>
             </div>
 
             <div class="summary-row">

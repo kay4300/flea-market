@@ -18,5 +18,21 @@ class MypageController extends Controller
 
         return view('mypage', compact('items'));
     }
+
+    public function purchase(Item $item)
+    {
+        $profile = auth()->user()->profile;
+
+        return view('purchase', compact('item', 'profile'));
+    }
+
+
+    // 住所変更画面表示
+    public function editAddress()
+    {
+        return view('address_edit');
+    }
+
+
     //
 }

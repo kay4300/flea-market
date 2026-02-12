@@ -102,7 +102,7 @@ class ItemController extends Controller
     public function show(Item $item)
     {
         // eager loadingでcommentsとusersの情報をまとめて取得。$item->comments→ commentテーブルのデータ    
-        $item->load(['user', 'categories','comments.user']);
+        $item->load(['user', 'categories', 'comments.user']);
         $item->loadCount('comments');
 
         // ログインしている場合のみ、いいね済みか判定
