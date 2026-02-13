@@ -74,7 +74,7 @@
         </div>
 
         <!-- 購入ボタン -->
-        <a href="{{ route('purchase', $item->id) }}" class="purchase-button">
+        <a href="{{ route('purchase.show', $item->id) }}" class="purchase-button">
             購入手続きへ
         </a>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
+use App\Models\Profile;
 
 class MypageController extends Controller
 {
@@ -19,12 +20,36 @@ class MypageController extends Controller
         return view('mypage', compact('items'));
     }
 
-    public function purchase(Item $item)
+    // 購入画面表示
+    public function show($itemId)
     {
-        $profile = auth()->user()->profile;
+        // 購入対象商品を取得
+        $item = Item::findOrFail($itemId);
+        // ログインユーザーのプロフィールを取得
+        $profile = Profile::where('user_id', Auth::id())->firstOrFail();
 
         return view('purchase', compact('item', 'profile'));
     }
+
+    public function purchase($id)
+    {
+        $item = Item::findOrFail($id);
+
+        $item->is_sold = true;
+        $item->buyer_id = auth()->id();
+        $item->save();
+
+        return redirect()->route('index');
+    }
+
+    // 購入済み商品の表示
+    public function mypage()
+    {
+        $purchasedItems = Item::where('buyer_id', auth()->id())->get();
+
+        return view('mypage', compact('purchasedItems'));
+    }
+
 
 
     // 住所変更画面表示

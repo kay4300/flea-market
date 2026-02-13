@@ -99,8 +99,12 @@ Route::middleware('auth')->group(
             return view('sell');
         })->name('sell');
 
+        // 購入画面を表示
+        Route::get('/purchase/{item}', [MypageController::class, 'show'])
+            ->name('purchase.show');
+
         // 購入画面。{item} は商品IDを受け取るためのパラメータ
-        Route::get('/purchase/{item}', [MypageController::class, 'purchase'])
+        Route::post('/purchase/{item}', [MypageController::class, 'purchase'])
             ->name('purchase');
         // 住所変更画面
         Route::get('/address/edit', [MypageController::class, 'editAddress'])

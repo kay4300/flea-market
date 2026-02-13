@@ -42,6 +42,9 @@
 <div class="item-list">
     @foreach ($items as $item)
     <div class="item-card">
+        @if($item->is_sold)
+        <span class="sold-label">sold</span>
+        @endif
         <a href="{{ route('items.show', $item->id) }}">
             <img
                 src="{{ $item->image }}"

@@ -87,9 +87,11 @@
 
         </div>
 
-        <form action="{{ route('thanks') }}" method="GET">
-            <button class="purchase-button">購入する</button>
+        <form action="{{ route('purchase', $item->id) }}" method="POST">
+            @csrf
+            <button type="submit">購入する</button>
         </form>
+
 
     </div>
 
