@@ -106,6 +106,9 @@ Route::middleware('auth')->group(
         // 購入画面。{item} は商品IDを受け取るためのパラメータ
         Route::post('/purchase/{item}', [MypageController::class, 'purchase'])
             ->name('purchase');
+
+        // Route::get('/index', [MypageController::class, 'index'])->name('index');
+
         // 住所変更画面
         Route::get('/address/edit', [MypageController::class, 'editAddress'])
             ->name('address.edit');
