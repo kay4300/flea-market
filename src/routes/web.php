@@ -67,7 +67,9 @@ Route::middleware('auth')->group(
         // 商品一覧（after login）
         Route::get('/index', [ItemController::class, 'index'])
             ->name('index.afterlogin')
-            ->middleware('auth', 'profile.completed');
+            ->middleware('profile.completed');
+        
+            
         //いいね追加 
         Route::post('/items/{item}/like', [ItemController::class, 'like'])
             ->name('items.like');
@@ -107,7 +109,7 @@ Route::middleware('auth')->group(
         Route::post('/purchase/{item}', [MypageController::class, 'purchase'])
             ->name('purchase');
 
-        // Route::get('/index', [MypageController::class, 'index'])->name('index');
+        
 
         // 住所変更画面
         Route::get('/address/edit', [MypageController::class, 'editAddress'])

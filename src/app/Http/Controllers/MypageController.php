@@ -39,7 +39,7 @@ class MypageController extends Controller
         $item->buyer_id = auth()->id();
         $item->save();
 
-        return redirect()->route('index');
+        return redirect()->route('index.afterlogin');
     }
 
     // 購入済み商品の表示
@@ -50,6 +50,12 @@ class MypageController extends Controller
         return view('mypage', compact('purchasedItems'));
     }
 
+    public function store(Request $request)
+    {
+        // 購入処理を書く
+
+        return redirect()->route('index.afterlogin');
+    }
 
 
     // 住所変更画面表示
