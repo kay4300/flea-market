@@ -76,6 +76,10 @@ Route::middleware('auth')->group(
         // いいね削除
         Route::delete('/items/{item}/unlike', [ItemController::class, 'unlike'])
             ->name('items.unlike');
+        // コメント追加
+        Route::get('/item/{id}', [ItemController::class, 'show']);
+        // コメント保存
+        Route::post('/item/{item}/comment', [ItemController::class, 'store'])->name('items.comment');
 
 
         // プロフィール登録・入力フォーム表示

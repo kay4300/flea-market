@@ -52,7 +52,8 @@
         <!-- いいね・コメント -->
         <div class="reaction">
             <div class="reaction__item">
-                <span class="reaction__count">{{ $likesCount }}</span>
+                <span class="reaction__count">{{ $item->liked_users_count }}
+                </span>
                 @auth
                 <form action="{{ $isLiked ? route('items.unlike', $item->id) : route('items.like', $item->id) }}" method="POST" style="display:inline;">
                     @csrf
@@ -108,7 +109,7 @@
         </div>
 
         <!-- コメント一覧 -->
-        <h2 class="section-title">コメント({{ $item->comments->count() }})</h2>
+        <h2 class="section-title">コメント({{ $item->comments_count }})</h2>
         @if ($item->comments && $item->comments->count())
         @foreach ($item->comments as $comment)
         <div class="comment">
@@ -127,7 +128,7 @@
         <!-- コメント投稿 -->
         <h2 class="section-title">商品へのコメント</h2>
 
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('items.comment', $item) }}">
             @csrf
             <textarea
                 name="comment"

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Requests\Content2Request;
+use App\Http\Requests\ContentRequest;
 use App\Models\Item;
 use App\Models\User;
 
@@ -111,18 +111,24 @@ class ItemController extends Controller
             : false;
         // いいね数を取得
         $likesCount = $item->likedUsers()->count();
+        // $item->loadCount(['comments', 'likedUsers']);
 
         return view('content', compact('item', 'isLiked', 'likesCount'));
     }
     // 未ログイン画面からコメント送信したときのエラー処理
-    public function store(Content2Request $request)
+    public function store(ContentRequest $request)
     {
-        if (!Auth::check()) {
-            return redirect()->route('login')
-                ->withErrors(['comment' => 'コメントするにはログインが必要です。'])
-                ->withInput();
-        }
+        // if (!Auth::check()) {
+        //     return redirect()->route('login')
+        //         ->withErrors(['comment' => 'コメントするにはログインが必要です。'])
+        //         ->withInput();
+        // }
+        $item->comments()->create([
+            'user_id' => Auth::id(),
+            'body' => $request->comment,
+        ]);
 
-        // コメント保存
+        // return redirect()->route('items.show', $item->id);
+        return back();
     }
 }
