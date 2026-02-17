@@ -116,7 +116,7 @@ class ItemController extends Controller
         return view('content', compact('item', 'isLiked', 'likesCount'));
     }
     // 未ログイン画面からコメント送信したときのエラー処理
-    public function store(ContentRequest $request)
+    public function store(ContentRequest $request, Item $item)
     {
         // if (!Auth::check()) {
         //     return redirect()->route('login')
@@ -125,10 +125,10 @@ class ItemController extends Controller
         // }
         $item->comments()->create([
             'user_id' => Auth::id(),
-            'body' => $request->comment,
+            'body' => $request->body,
         ]);
 
-        // return redirect()->route('items.show', $item->id);
-        return back();
+        return redirect()->route('items.show', $item->id);
+        // return back();
     }
 }

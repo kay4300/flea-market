@@ -131,7 +131,7 @@
         <form method="POST" action="{{ route('items.comment', $item) }}">
             @csrf
             <textarea
-                name="comment"
+                name="body"
                 maxlength="255"
                 placeholder="255文字以内で入力してください"
                 class="comment-textarea">
