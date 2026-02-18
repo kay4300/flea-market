@@ -113,14 +113,9 @@ Route::middleware('auth')->group(
         Route::post('/purchase/{item}', [MypageController::class, 'purchase'])
             ->name('purchase');
 
-        
-
         // 住所変更画面
         Route::get('/address/edit', [MypageController::class, 'editAddress'])
             ->name('address.edit');
-
-
-
 
         // ログアウト
         Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');
