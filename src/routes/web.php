@@ -39,9 +39,6 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
 Route::middleware('auth')->group(
     function () {
 
-        // 「認証はこちらから」
-        // Route::post('/verified/redirect', [EmailVerifiedRedirectController::class, 'redirect'])
-        //     ->name('verified.redirect');
         Route::post('/verified/redirect', function (Request $request) {
 
             $user = $request->user();

@@ -72,7 +72,7 @@ class MakeProfileController extends Controller
     {
         $profile = Auth::user()->profile ?? new Profile();
         
-            return view('profile.edit', compact('profile'));
+            return view('profile', compact('profile'));
         
     }
 
@@ -102,7 +102,7 @@ class MakeProfileController extends Controller
             'building' => $request->building,
         ]);
         return redirect()
-            ->route('profile.edit')
+            ->route('mypage')
             ->with('success', 'プロフィールを更新しました。');
     }
 }

@@ -33,6 +33,8 @@
     <!-- プロフィール編集のルートに送信 enctype="multipart/form-data"は画像送信-->
     <form class="form" method="POST" action="{{ route('profile.update') }}" enctype="multipart/form-data">
         @csrf
+        {{ method_field('PUT') }}
+        <!-- @method('PUT') -->
         <div class="form__group">
             <div class="form__group-title">
                 <span class="form__label--item">プロフィール画像</span>
