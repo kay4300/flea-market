@@ -20,26 +20,18 @@
         登録したメールアドレスに認証メールを送信しました。<br>
         メール内のリンクをクリックしてください。
     </p>
-    <!-- <p class="verify__text">
-        登録していただいたメールアドレスに認証メールを送付しました。<br>
-        メール認証を完了してください.
-    </p> -->
 
     <div class="verify__button-wrapper">
-        <!-- <a href="{{ route('verification.notice') }}" class="verify__button"> -->
-        <!-- メール認証済みかどうかに関係なくトップページに飛ぶ -->
-        <!-- <a href="{{ route('top', ['tab' => 'mylist']) }}" class="verify__button">
-         -->
-        <!-- 認証はこちらから
-        </a> -->
-
-        <!-- 認証済みテスト用フォーム送信 -->
-        <form method="POST" action="{{ route('verified.redirect') }}">
+        <!-- 認証済みフォーム送信 -->
+        <a href="{{ URL::signedRoute('after.verify') }}" >
+            認証はこちらから
+        </a>
+        <!-- <form method="POST" action="{{ route('verified.redirect') }}">
             @csrf
             <button type="submit" class="verify__button">
-                認証はこちらから（テスト用）
+                認証はこちらから
             </button>
-        </form>
+        </form> -->
     </div>
 
     <div class="verify__resend">

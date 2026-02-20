@@ -30,12 +30,9 @@ class MakeProfileController extends Controller
     public function store(MakeProfileRequest $request)
     {
         $user = Auth::user();
-        // dd($user);
         // 既存プロフィールを取得、なければ新規作成
-        // $profile = Profile::firstOrNew(['user_id' => $user->id]);
-
-        // 既存プロフィールがあれば取得、なければ新規作成
-        $profile = $user->profile ?? new Profile();
+        $profile = Profile::firstOrNew(['user_id' => $user->id]);
+        // $profile = $user->profile ?? new Profile();
         $profile->user_id = $user->id;
         $profile->name     = $request->name;
         $profile->postcode = $request->postcode;

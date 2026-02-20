@@ -26,14 +26,27 @@ Route::get('/mailenable', function () {
 
 // メール認証（ユーザーがメール内のリンクをクリックしたときの処理）
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {
-    $request->fulfill();
-    // プロフィール登録画面へ
-    if (! $request->user()->profile) {
+    $request->fulfill();    
+
+    $user = Auth::user();
+    $profile = $user->profile;
+
+    // プロフィールが存在しない OR 必須項目が空なら作成画面へ
+    if (!$profile || empty($profile->postcode) || empty($profile->address) || empty($profile->building)) {
         return redirect()->route('makeprofile.create');
     }
+
+    // プロフィール登録画面へ
+    // if (! $request->user()->profile) {
+    //     return redirect()->route('makeprofile.create');
+    // }
     // 登録済みならindexへ
     return redirect()->route('index.afterlogin');
 })->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::get('/after-verify', [EmailVerifiedRedirectController::class, 'redirect'])
+    ->middleware(['auth', 'signed'])
+    ->name('after.verify');
 
 // 認証済みユーザーのみ
 Route::middleware('auth')->group(
