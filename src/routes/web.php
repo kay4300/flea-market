@@ -19,10 +19,15 @@ use App\Models\Item;
 // メール認証ルート
 // Auth::routes(['verify' => true]);
 
-// メール認証画面
+// メール認証誘導画面
 Route::get('/mailenable', function () {
     return view('mailenable');
 })->middleware('auth')->name('mailenable');
+
+// メール認証画面（新規）
+Route::get('/mailverification', function () {
+    return view('mailverification');
+})->name('mailverification');
 
 // メール認証（ユーザーがメール内のリンクをクリックしたときの処理）
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {

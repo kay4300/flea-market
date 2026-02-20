@@ -23,10 +23,11 @@
 
     <div class="verify__button-wrapper">
         <!-- 認証済みフォーム送信 -->
-        <a href="{{ URL::signedRoute('after.verify') }}" >
-            認証はこちらから
-        </a>
-        <!-- <form method="POST" action="{{ route('verified.redirect') }}">
+        <!-- <a href="{{ URL::signedRoute('after.verify') }}"> -->
+        <a href="{{ route('mailverification') }}" class="btn btn-primary">
+                認証はこちらから
+            </a>
+            <!-- <form method="POST" action="{{ route('verified.redirect') }}">
             @csrf
             <button type="submit" class="verify__button">
                 認証はこちらから
