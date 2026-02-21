@@ -37,6 +37,10 @@ class Item extends Model
         )->withTimestamps();
     }
 
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
     
 }
 

@@ -21,10 +21,11 @@
         <button type="submit">ログアウト</button>
     </form>
 
-    <a href="{{ route('mypage') }}">マイページ</a>
+    <a href="{{ route('index') }}">商品一覧へ</a>
     <a href="{{ route('sell') }}">出品</a>
 </header>
 
+<h2>マイページ</h2>
 <!-- マイページ ユーザー情報 -->
 <div class="mypage-user">
     <!-- 左：ユーザー画像 -->
@@ -49,21 +50,62 @@
 
 <!-- 見出し -->
 <div class="tab">
-    <h2 class="tab__item tab__item--active">出品した商品</h2>
-    <h2 class="tab__item">購入した商品</h2>
-</div>
+    <input type="radio" name="tab" id="tab-sell">
+    <label for="tab-sell">
+        <h3>出品した商品</h3>
+    </label>
 
-<!-- 商品一覧 -->
-<div class="item-list">
-    @foreach ($items as $item)
-    <div class="item-card">
-        <a href="{{ route('items.show', $item->id) }}">
-            <img
-                src="{{ $item->image }}"
-                alt="{{ $item->name }}"
-                class="item-card__image">
-            <p class="item-card__name">{{ $item->name }}</p>
-        </a>
+    <input type="radio" name="tab" id="tab-purchased" checked>
+    <label for="tab-purchased">
+        <h3>購入した商品</h3>
+    </label>
+
+    <div class="tab-content">
+        <!-- 出品商品 -->
+        <div class="tab-pane" id="pane-sell">
+            <div class="item-list">
+                @foreach ($sellItems as $item)
+                <div class="item-card">
+                    <a href="{{ route('items.show', $item->id) }}">
+                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="item-card__image">
+                        <p class="item-card__name">{{ $item->name }}</p>
+                        <p class="item-card__price">{{ $item->price }}円</p>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
+
+        <!-- 購入商品 -->
+        <div class="tab-pane" id="pane-purchased">
+            <div class="item-list">
+                @foreach ($purchasedItems as $item)
+                <div class="item-card">
+                    <a href="{{ route('items.show', $item->id) }}">
+                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="item-card__image">
+                        <p class="item-card__name">{{ $item->name }}</p>
+                        <p class="item-card__price">{{ $item->price }}円</p>
+                    </a>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </div>
-    @endforeach
+
+    <!-- 商品一覧 -->
+    <!-- <div class="item-list">
+        @foreach ($purchasedItems as $item)
+        <div class="item-card">
+            <a href="{{ route('items.show', $item->id) }}">
+                <img
+                    src="{{ $item->image }}"
+                    alt="{{ $item->name }}"
+                    class="item-card__image">
+
+                <p class="item-card__name">{{ $item->name }}</p>
+                <p class="item-card__price">{{ $item->price }}円</p>
+            </a>
+        </div>
+        @endforeach
+    </div> -->
 </div>

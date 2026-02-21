@@ -16,6 +16,10 @@
             class="header__search"
             placeholder="何をお探しですか？">
     </div>
+    <form action="{{ route('login') }}" method="GET">
+        @csrf
+        <button type="submit">ログイン</button>
+    </form>
     <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit">ログアウト</button>

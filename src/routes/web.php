@@ -112,8 +112,10 @@ Route::middleware('auth')->group(
         Route::put('/profile', [MakeProfileController::class, 'update'])->name('profile.update');
 
         // マイページ
-        Route::get('/mypage', [MypageController::class, 'index'])
+        Route::get('/mypage', [MypageController::class, 'mypage'])
             ->name('mypage');
+        // index画面へ
+        Route::get('/index', [MyPageController::class, 'index'])->name('index');
 
         // 出品
         Route::get('/sell', function () {
