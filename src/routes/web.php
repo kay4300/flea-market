@@ -81,8 +81,7 @@ Route::middleware('auth')->group(
 
         // 商品一覧（after login）
         Route::get('/index', [ItemController::class, 'index'])
-            ->name('index.afterlogin')
-            ->middleware('profile.completed');
+            ->name('index.afterlogin');
         
             
         //いいね追加 
@@ -114,8 +113,6 @@ Route::middleware('auth')->group(
         // マイページ
         Route::get('/mypage', [MypageController::class, 'mypage'])
             ->name('mypage');
-        // index画面へ
-        Route::get('/index', [MyPageController::class, 'index'])->name('index');
 
         // 出品
         Route::get('/sell', function () {

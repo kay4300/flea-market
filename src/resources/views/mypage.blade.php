@@ -21,7 +21,7 @@
         <button type="submit">ログアウト</button>
     </form>
 
-    <a href="{{ route('index') }}">商品一覧へ</a>
+    <a href="{{ route('mypage') }}">マイページ</a>
     <a href="{{ route('sell') }}">出品</a>
 </header>
 

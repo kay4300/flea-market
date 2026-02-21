@@ -21,9 +21,8 @@ class LoginController extends Controller
         // 認証成功
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate(); // セキュリティ用にセッション再生成
-            return redirect()->route('items.index'); // index.blade.php に遷移
+            return redirect()->route('index.afterlogin'); // index.blade.php に遷移
         }
-
         // 認証失敗
         return back()->withErrors([
             'email' => 'メールアドレスまたはパスワードが正しくありません。',
