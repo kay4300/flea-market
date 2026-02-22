@@ -160,10 +160,10 @@
                     {{ $message }}
                     @enderror
                 </div>
-        </div>
+            </div>
 
-        <div class="form__button">
-            <button class="form__button-submit" type="submit">出品する</button>
-        </div>
+            <div class="form__button">
+                <button class="form__button-submit" type="submit">出品する</button>
+            </div>
     </form>
 </div>

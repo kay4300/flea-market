@@ -119,6 +119,8 @@ Route::middleware('auth')->group(
             return view('sell');
         })->name('sell');
 
+        
+
         // 購入画面を表示
         Route::get('/purchase/{item}', [MypageController::class, 'show'])
             ->name('purchase.show');
