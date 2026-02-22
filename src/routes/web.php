@@ -31,7 +31,7 @@ Route::get('/mailverification', function () {
 
 // メール認証（ユーザーがメール内のリンクをクリックしたときの処理）
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {
-    $request->fulfill();    
+    $request->fulfill();
 
     $user = Auth::user();
     $profile = $user->profile;
@@ -82,8 +82,8 @@ Route::middleware('auth')->group(
         // 商品一覧（after login）
         Route::get('/index', [ItemController::class, 'index'])
             ->name('index.afterlogin');
-        
-            
+
+
         //いいね追加 
         Route::post('/items/{item}/like', [ItemController::class, 'like'])
             ->name('items.like');
