@@ -31,7 +31,7 @@
     </div>
 
     <!-- action="/register"→登録処理用のルートに送信 -->
-    <form class="form" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+    <form class="form" method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form__group">
             <div class="form__group-title">
@@ -40,6 +40,7 @@
             <!-- 商品の画像を選択して表示 -->
             <div class="form__group-content">
                 <input type="file" name="image" accept="image/*">
+                
             </div>
             <div class="form__error">
                 @error('image')

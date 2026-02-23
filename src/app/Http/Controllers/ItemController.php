@@ -131,4 +131,30 @@ class ItemController extends Controller
         return redirect()->route('items.show', $item->id);
         // return back();
     }
+    // 出品画面を表示
+    public function create()
+    {
+        return view('sell');
+    }
+    // 出品する画像と商品名を保存
+    public function storeItem(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'image' => 'required|image|max:2048', // 画像必須・2MBまで
+        ]);
+
+        $path = null;
+        // 画像を保存してパスを取得
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('items', 'public');
+        }
+        // DBに保存
+        Item::create([
+            'name' => $request->name,
+            'image' => $path,
+        ]);
+
+        return redirect('/index'); // 保存後トップにリダイレクト
+    }
 }

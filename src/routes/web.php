@@ -115,11 +115,16 @@ Route::middleware('auth')->group(
             ->name('mypage');
 
         // 出品
-        Route::get('/sell', function () {
-            return view('sell');
-        })->name('sell');
+        // sellページを表示
+        Route::get('/sell', [ItemController::class, 'create'])->name('sell');
 
-        
+        // 画像・商品を保存
+        Route::post('/sell', [ItemController::class, 'storeItem'])->name('items.store');
+        // Route::get('/sell', function () {
+        //     return view('sell');
+        // })->name('sell');
+
+
 
         // 購入画面を表示
         Route::get('/purchase/{item}', [MypageController::class, 'show'])
