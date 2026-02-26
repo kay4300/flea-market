@@ -48,7 +48,7 @@ class CommentSeeder extends Seeder
             // 例: IDが偶数なら良い評価80%、奇数なら60%
             $goodChance = $item->id % 2 === 0 ? 80 : 60;
 
-            Comment::factory()->count(3)->make()->each(function ($comment) use ($item, $users, $faker, $goodComments, $badComments, $goodChance) {
+            Comment::factory()->count(1)->make()->each(function ($comment) use ($item, $users, $faker, $goodComments, $badComments, $goodChance) {
                     $comment->user_id = $users->random()->id;
                     $comment->item_id = $item->id;
                     $comment->body = $this->makeReviewComment(
@@ -72,6 +72,6 @@ class CommentSeeder extends Seeder
             $comment = $faker->randomElement($badComments);
         }
 
-        return "「{$itemName}」についての評価です。{$comment}";
+        return "{$comment}";
     }
 }

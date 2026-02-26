@@ -151,10 +151,11 @@ class ItemController extends Controller
         }
         // DBに保存
         Item::create([
+            'user_id' => auth()->id(),
             'name' => $request->name,
-            'image' => $path,
+            'image' => '/storage' . $path,
         ]);
 
-        return redirect('/index'); // 保存後トップにリダイレクト
+        return redirect('/mypage'); // 保存後トップにリダイレクト
     }
 }
