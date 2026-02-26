@@ -73,7 +73,6 @@ Route::middleware('auth')->group(
             if (!$user->profile) {
                 return redirect()->route('makeprofile.create');
             }
-            // return redirect()->route('index.afterlogin');
 
             // 登録済みなら index へ
             return redirect()->route('index.afterlogin');
