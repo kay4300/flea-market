@@ -16,7 +16,7 @@ class ItemSeeder extends Seeder
     public function run()
     {
         $user = User::first();
-        Item::factory()->count(30)->create([
+        Item::factory()->count(10)->create([
             'user_id' => User::first()->id
 
         ]);

@@ -19,8 +19,7 @@ class CommentFactory extends Factory
         $faker = FakerFactory::create('ja_JP');
 
         return [
-            'item_id' => 1,            // Seederで上書き予定
-            'user_id' => 1,            // Seederで上書き予定
+            
             'body' => $this->faker->realText(100),
             //
         ];

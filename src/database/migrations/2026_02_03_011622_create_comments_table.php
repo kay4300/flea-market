@@ -19,6 +19,9 @@ class CreateCommentsTable extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Userとのリレーション
             $table->text('body'); // コメント本文
             $table->timestamps();
+
+            // 同じユーザーが同じ商品に複数コメントを防ぐためのユニーク制約
+            $table->unique(['item_id', 'user_id']);
         });
     }
 

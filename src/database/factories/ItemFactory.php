@@ -74,8 +74,14 @@ class ItemFactory extends Factory
                 'brand' => '',
                 'price_options' => [1000, 1500, 3000],
             ],
+            'ヘアドライヤー' => [
+                'image' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxn-gjvnXQjq7P2HZoNzmW9OUMOC8l1Zy3EA&s',
+                'description' => '高品質なヘアドライヤーで、快適なヘアケアを実現します。',
+                'brand' => 'Panasonic',
+                'price_options' => [3000, 5000, 8000],
+            ]
         ];
-        $name = $this->faker->randomElement(array_keys($products));
+        $name = $this->faker->unique()->randomElement(array_keys($products));
 
         return [
             'name' => $name, // 商品名
