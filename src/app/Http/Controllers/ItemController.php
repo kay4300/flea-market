@@ -153,9 +153,19 @@ class ItemController extends Controller
         Item::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
-            'image' => '/storage' . $path,
+            'image' => $path,
         ]);
 
         return redirect('/mypage'); // 保存後トップにリダイレクト
+    }
+
+    public function mypage()
+    {
+        $items = Item::where('user_id', auth()->id())->get();
+
+        // 購入した商品
+        $purchasedItems = Item::where('buyer_id', auth()->id())->get();
+
+        return view('mypage', compact('items', 'purchasedItems'));
     }
 }

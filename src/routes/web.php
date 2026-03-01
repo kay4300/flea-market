@@ -119,6 +119,7 @@ Route::middleware('auth')->group(
 
         // 画像・商品を保存
         Route::post('/sell', [ItemController::class, 'storeItem'])->name('items.store');
+        Route::get('/mypage', [ItemController::class, 'mypage'])->name('mypage');
         // Route::get('/sell', function () {
         //     return view('sell');
         // })->name('sell');

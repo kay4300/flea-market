@@ -64,10 +64,10 @@
         <!-- 出品商品 -->
         <div class="tab-pane" id="pane-sell">
             <div class="item-list">
-                @foreach ($sellItems as $item)
+                @foreach ($items as $item)
                 <div class="item-card">
                     <a href="{{ route('items.show', $item->id) }}">
-                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="item-card__image">
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="item-card__image">
                         <p class="item-card__name">{{ $item->name }}</p>
                         <p class="item-card__price">{{ $item->price }}円</p>
                     </a>
