@@ -64,7 +64,7 @@
         <!-- 出品商品 -->
         <div class="tab-pane" id="pane-sell">
             <div class="item-list">
-                @foreach ($items as $item)
+                @foreach ($sellItems as $item)
                 <div class="item-card">
                     <a href="{{ route('items.show', $item->id) }}">
                         <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}" class="item-card__image">

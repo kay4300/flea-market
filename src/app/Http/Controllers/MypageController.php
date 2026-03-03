@@ -9,15 +9,15 @@ use App\Models\Profile;
 
 class MypageController extends Controller
 {
-    public function index()
-    {
-    // 全商品を取得（購入済みかどうかは関係なし）
-    $items = Item::all();
-        $tab = 'all';
+    // public function index()
+    // {
+    //     // 出品商品を取得
+    //     $items = Item::where('user_id', auth()->id())->get();
+    //     $tab = 'sell';
 
-        // index.blade.php に渡す
-        return view('index', compact('items', 'tab'));
-    }
+    //     // index.blade.php に渡す
+    //     return view('mypage', compact('items', 'tab'));
+    // }
     // マイページ表示
     //     $user = Auth::user();
 
