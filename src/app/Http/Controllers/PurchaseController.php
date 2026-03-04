@@ -41,7 +41,7 @@ class PurchaseController extends Controller
             'item_id' => $itemId,
         ]);
 
-        return redirect()->route('mypage');//
+        return redirect()->route('mypage'); //
     }
 
     /**

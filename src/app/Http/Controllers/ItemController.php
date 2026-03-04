@@ -140,21 +140,38 @@ class ItemController extends Controller
     public function storeItem(Request $request)
     {
         $request->validate([
+            'price' => 'required|numeric|min:0',
             'name' => 'required|string|max:255',
+            'condition' => 'required|string',
             'image' => 'required|image|max:2048', // 画像必須・2MBまで
+            'categories' => 'required|array',
         ]);
 
         $path = null;
         // 画像を保存してパスを取得
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('items', 'public');
+            // 既存画像があればそのパスを使用
+        } else if ($request->input('existing_image')) {
+            $path = $request->input('existing_image');
         }
+
+        // 価格を数値化
+        $price = (int) str_replace(',', '', $request->price);
+
         // DBに保存
         Item::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'image' => $path,
+            'price' => $price,
+            'item_condition' => $request->condition,
+            'brand' => $request->brand,
+            'description' => $request->comment,
         ]);
+
+        // 中間テーブルに保存
+        $item->categories()->attach($request->categories);
 
         return redirect('/mypage'); // 保存後トップにリダイレクト
     }

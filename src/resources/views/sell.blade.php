@@ -40,7 +40,7 @@
             <!-- 商品の画像を選択して表示 -->
             <div class="form__group-content">
                 <input type="file" name="image" accept="image/*">
-                
+
             </div>
             <div class="form__error">
                 @error('image')
@@ -54,26 +54,31 @@
             <div class="form__group-title">
                 <span class="form__label--item">カテゴリー</span>
             </div>
-            @php
+            <!-- @php
             $categories = [
             'ファッション', '家電', 'インテリア', 'レディース', 'メンズ',
             'コスメ', '本', 'ゲーム', 'スポーツ', 'キッチン',
             'ハンドメイド', 'アクセサリー', 'おもちゃ', 'ベビー・キッズ'
             ];
             $selectedCategories = old('categories', []);
+            @endphp -->
+            <!-- DBから全カテゴリーを取得 -->
+            @php
+            $allCategories = \App\Models\Category::all();
+            $selectedCategories = old('categories', []);
             @endphp
 
             <div class="category-select">
-                @foreach ($categories as $index => $category)
+                @foreach ($allCategories as $index => $category)
                 <input
                     type="checkbox"
                     id="category_{{ $index }}"
                     name="categories[]"
-                    value="{{ $category }}"
-                    {{ in_array($category, $selectedCategories) ? 'checked' : '' }}
+                    value="{{ $category->id }}"
+                    {{ in_array($category->id, $selectedCategories) ? 'checked' : '' }}
                     class="category-checkbox">
-                <label for="category_{{ $index }}" class="category-label">
-                    {{ $category }}
+                <label for="category_{{ $category->id }}" class="category-label">
+                    {{ $category->name }}
                 </label>
                 @endforeach
             </div>
@@ -105,10 +110,10 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="item" value="{{ old('item') }}" required>
+                    <input type="text" name="name" value="{{ old('name') }}" required>
                 </div>
                 <div class="form__error">
-                    @error('item')
+                    @error('name')
                     {{ $message }}
                     @enderror
                 </div>

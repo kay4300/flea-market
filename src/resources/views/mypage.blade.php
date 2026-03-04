@@ -50,12 +50,12 @@
 
 <!-- 見出し -->
 <div class="tab">
-    <input type="radio" name="tab" id="tab-sell">
+    <input type="radio" name="tab" id="tab-sell" checked>
     <label for="tab-sell">
         <h3>出品した商品</h3>
     </label>
 
-    <input type="radio" name="tab" id="tab-purchased" checked>
+    <input type="radio" name="tab" id="tab-purchased">
     <label for="tab-purchased">
         <h3>購入した商品</h3>
     </label>
