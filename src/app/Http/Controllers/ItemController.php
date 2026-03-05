@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\ContentRequest;
 use App\Models\Item;
+use App\Models\Purchase;
 use App\Models\User;
 
 class ItemController extends Controller
@@ -159,8 +160,8 @@ class ItemController extends Controller
         // 価格を数値化
         $price = (int) str_replace(',', '', $request->price);
 
-        // DBに保存
-        Item::create([
+        // DBに保存。create()はfillableに入れたカラムのみ保存。createの戻り値を$itemに入れる。
+        $item =Item::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'image' => $path,
@@ -178,11 +179,17 @@ class ItemController extends Controller
 
     public function mypage()
     {
-        $items = Item::where('user_id', auth()->id())->get();
+        $userId = auth()->id();
+
+        // 出品した商品
+        $sellItems = Item::where('user_id', $userId)->get();
 
         // 購入した商品
-        $purchasedItems = Item::where('buyer_id', auth()->id())->get();
+        $purchasedItems = Purchase::where('buyer_id', $userId)
+            ->with('item')
+            ->get()
+            ->pluck('item');
 
-        return view('mypage', compact('items', 'purchasedItems'));
+        return view('mypage', compact('sellItems', 'purchasedItems'));
     }
 }
