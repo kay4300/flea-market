@@ -33,7 +33,7 @@
         {{-- 商品情報 --}}
         <div class="product-row">
             <div class="product-image">
-                <img src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
+                <img src="{{ asset('storage/' . $item->image) }}" alt="商品画像">
             </div>
 
             <div class="product-detail">
