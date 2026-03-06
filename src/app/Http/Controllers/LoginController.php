@@ -19,21 +19,17 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        // 認証成功
+        // 認証成功。セキュリティ用にセッション再生成
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate(); // セキュリティ用にセッション再生成
+            $request->session()->regenerate();
 
             $user = Auth::user();
-
-            // メール未認証ならメール認証誘導画面へ
-            if (! $user->hasVerifiedEmail()) {
-                return redirect()->route('mailenable');
-            }
 
             // 認証済みならプロフィールチェック
             $profile = $user->profile;
 
-            if (!$profile || empty($profile->name) || empty($profile->address)) {
+            // 必須項目が空なら登録ルートへ
+            if (!$profile || trim($profile->name) === '' || trim($profile->address) === '') {
                 return redirect()->route('makeprofile.create');
             }
 

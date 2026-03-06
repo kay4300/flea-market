@@ -51,14 +51,12 @@
 <!-- 見出し -->
 <div class="tab">
     <input type="radio" name="tab" id="tab-sell" checked>
-    <label for="tab-sell">
-        <h3>出品した商品</h3>
-    </label>
-
     <input type="radio" name="tab" id="tab-purchased">
-    <label for="tab-purchased">
-        <h3>購入した商品</h3>
-    </label>
+
+    <div class="tab-labels">
+        <label for="tab-sell">出品した商品</label>
+        <label for="tab-purchased">購入した商品</label>
+    </div>
 
     <div class="tab-content">
         <!-- 出品商品 -->
@@ -82,9 +80,10 @@
                 @foreach ($purchasedItems as $item)
                 <div class="item-card">
                     <a href="{{ route('items.show', $item->id) }}">
-                        <img src="{{ $item->image }}" alt="{{ $item->name }}" class="item-card__image">
-                        <p class="item-card__name">{{ $item->name }}</p>
-                        <p class="item-card__price">{{ $item->price }}円</p>
+                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"
+                        class="item-card__image">
+                            <p class="item-card__name">{{ $item->name }}</p>
+                            <p class="item-card__price">{{ $item->price }}円</p>
                     </a>
                 </div>
                 @endforeach

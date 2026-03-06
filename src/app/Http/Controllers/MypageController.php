@@ -27,32 +27,6 @@ class MypageController extends Controller
     //     return view('mypage', compact('sellItems'));
     // }
 
-    // 購入画面表示
-    public function show($itemId)
-    {
-        // 購入対象商品を取得
-        $item = Item::findOrFail($itemId);
-        // ログインユーザーのプロフィールを取得
-        $profile = Profile::where('user_id', Auth::id())->firstOrFail();
-
-        return view('purchase', compact('item', 'profile'));
-    }
-
-    public function purchase($id)
-    {
-        $item = Item::findOrFail($id);
-
-        if ($item->is_sold) {
-            return back()->with('error', 'この商品はすでに売り切れです');
-        }
-
-        $item->is_sold = true;
-        $item->buyer_id = auth()->id();
-        $item->save();
-
-        return redirect()->route('mypage');
-    }
-
     // 購入済み商品の表示
     public function mypage()
     {

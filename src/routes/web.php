@@ -9,6 +9,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\EmailVerifiedRedirectController;
 use App\Http\Controllers\MypageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PurchaseController;
 use App\Models\Item;
 
 // 登録フォーム表示
@@ -16,38 +17,28 @@ use App\Models\Item;
 //     return view('register');
 // })->middleware('guest')->name('register');
 
-// メール認証ルート
-// Auth::routes(['verify' => true]);
-
 // メール認証誘導画面
 Route::get('/mailenable', function () {
-    return view('mailenable');
-})->middleware('auth')->name('mailenable');
+    return view('mailenable');})->middleware('auth')->name('mailenable');
 
 // メール認証画面（新規）
 Route::get('/mailverification', function () {
-    return view('mailverification');
-})->name('mailverification');
+    return view('mailverification');})->name('mailverification');
 
 // メール認証（ユーザーがメール内のリンクをクリックしたときの処理）
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     $request->fulfill();
+    return redirect()->route('makeprofile.create');
 
     $user = Auth::user();
     $profile = $user->profile;
+    })->middleware(['auth', 'signed'])->name('verification.verify');
 
-    // プロフィールが存在しない OR 必須項目が空なら作成画面へ
-    if (!$profile || empty($profile->postcode) || empty($profile->address) || empty($profile->building)) {
-        return redirect()->route('makeprofile.create');
-    }
-
-    // プロフィール登録画面へ
-    // if (! $request->user()->profile) {
-    //     return redirect()->route('makeprofile.create');
-    // }
-    // 登録済みならindexへ
+// 登録済みならindexへ
+Route::get('/index', function () {
+    // return view('index');
     return redirect()->route('index.afterlogin');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+})->middleware(['auth', 'signed'])->name('index.afterlogin');
 
 Route::get('/after-verify', [EmailVerifiedRedirectController::class, 'redirect'])
     ->middleware(['auth', 'signed'])
@@ -70,9 +61,9 @@ Route::middleware('auth')->group(
             // $user->load('profile');
 
             // プロフィール未登録なら makeprofile へ
-            if (!$user->profile) {
-                return redirect()->route('makeprofile.create');
-            }
+            // if (!$user->profile) {
+            //     return redirect()->route('makeprofile.create');
+            // }
 
             // 登録済みなら index へ
             return redirect()->route('index.afterlogin');
@@ -81,7 +72,6 @@ Route::middleware('auth')->group(
         // 商品一覧（after login）
         Route::get('/index', [ItemController::class, 'index'])
             ->name('index.afterlogin');
-
 
         //いいね追加 
         Route::post('/items/{item}/like', [ItemController::class, 'like'])
@@ -120,25 +110,19 @@ Route::middleware('auth')->group(
         // 画像・商品を保存
         Route::post('/sell', [ItemController::class, 'storeItem'])->name('items.store');
         
-
-
-        // Route::get('/sell', function () {
-        //     return view('sell');
-        // })->name('sell');
-
-
-
         // 購入画面を表示
-        Route::get('/purchase/{item}', [MypageController::class, 'show'])
+        Route::get('/purchase/{item}', [PurchaseController::class, 'show'])
             ->name('purchase.show');
 
         // 購入画面。{item} は商品IDを受け取るためのパラメータ
-        Route::post('/purchase/{item}', [MypageController::class, 'purchase'])
+        Route::post('/purchase/{item}', [PurchaseController::class, 'purchase'])
             ->name('purchase');
 
-        // 住所変更画面
-        Route::get('/address/edit', [MypageController::class, 'editAddress'])
-            ->name('address.edit');
+        // 住所変更画面表示
+        Route::get('/address/edit', [PurchaseController::class, 'editProfile'])->name('address.edit');
+
+        // 住所更新処理
+        Route::post('/address/update', [PurchaseController::class, 'updateProfile'])->name('address.update');
 
         // ログアウト
         Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');

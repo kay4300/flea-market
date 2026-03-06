@@ -161,7 +161,7 @@ class ItemController extends Controller
         $price = (int) str_replace(',', '', $request->price);
 
         // DBに保存。create()はfillableに入れたカラムのみ保存。createの戻り値を$itemに入れる。
-        $item =Item::create([
+        $item = Item::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'image' => $path,
@@ -185,10 +185,10 @@ class ItemController extends Controller
         $sellItems = Item::where('user_id', $userId)->get();
 
         // 購入した商品
-        $purchasedItems = Purchase::where('buyer_id', $userId)
-            ->with('item')
-            ->get()
-            ->pluck('item');
+        $purchasedItems = Purchase::where('buyer_id', $userId)->get();
+            // ->with('item')
+            // ->get()
+            // ->pluck('item');
 
         return view('mypage', compact('sellItems', 'purchasedItems'));
     }
