@@ -1,0 +1,17 @@
+.header {
+    width: 1600px;
+    height: 40px;
+    background: #000;
+    display: flex;
+    align-items: center;
+}
+
+.header__inner {
+    padding-left: 20px;
+}
+
+.header__logo {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+}

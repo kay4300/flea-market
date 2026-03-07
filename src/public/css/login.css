@@ -1,0 +1,85 @@
+/* 全体レイアウト */
+.register-form__content {
+    width: 500px;
+    margin: 100px auto 0px;
+}
+
+/* タイトル */
+.register-form__heading {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.register-form__heading h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* フォームグループ */
+.form__group {
+    margin-bottom: 30px;
+}
+.form {
+    transform: translateX(-60px);
+}
+
+/* ラベル */
+.form__label--item {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 入力欄 */
+.form__input--text input {
+    width: 680px;
+    height: 65.25px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 0 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+/* エラーメッセージ */
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+/* ボタンエリア */
+.form__button {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* ログインボタン */
+.form__button-submit {
+    display: block;
+    width: 680px;
+    height: 65.25px;
+    line-height: 65.25px;
+    border-radius: 5px;
+    background: #FF5555;
+    border: none;
+    text-decoration: none;
+
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #FFFFFF;
+    text-align: center;
+
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+/* 会員登録リンク */
+a.form__button-submit {
+    background: transparent;
+    color: #0073ff;
+    font-size: 18px;
+    line-height: normal;
+    height: auto;
+}

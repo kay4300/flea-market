@@ -9,6 +9,7 @@
     <title>@yield('title', 'Flea Market')</title>
 
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('css')
 </head>
 
@@ -16,7 +17,7 @@
 
     <header class="header">
         <div class="header__inner">
-            <a class="header__logo" href="/">COACHTECH</a>
+            <div class="header__logo">COACHTECH</div>
         </div>
     </header>
 

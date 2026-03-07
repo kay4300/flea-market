@@ -10,11 +10,11 @@
 
 <div class="verify">
 
-    @if (session('status') == 'verification-link-sent')
+    <!-- @if (session('status') == 'verification-link-sent')
     <p style="color: green;">
         認証を確認しました
     </p>
-    @endif
+    @endif -->
 
     <p>
         登録したメールアドレスに認証メールを送信しました。<br>
