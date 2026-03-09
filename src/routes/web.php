@@ -36,8 +36,8 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
 
 // 登録済みならindexへ
 Route::get('/index', function () {
-    // return view('index');
-    return redirect()->route('index.afterlogin');
+    return view('index');
+    // return redirect()->route('index.afterlogin');
 })->middleware(['auth', 'signed'])->name('index.afterlogin');
 
 Route::get('/after-verify', [EmailVerifiedRedirectController::class, 'redirect'])
@@ -50,12 +50,12 @@ Route::middleware('auth')->group(
 
         Route::post('/verified/redirect', function (Request $request) {
 
-            $user = $request->user();
+            // $user = $request->user();
 
-            // ユーザーをメール認証済みにする
-            if (!$user->hasVerifiedEmail()) {
-                $user->markEmailAsVerified();
-            }
+            // // ユーザーをメール認証済みにする
+            // if (!$user->hasVerifiedEmail()) {
+            //     $user->markEmailAsVerified();
+            // }
 
             // Eager Load で profile を確認
             // $user->load('profile');
@@ -64,7 +64,15 @@ Route::middleware('auth')->group(
             // if (!$user->profile) {
             //     return redirect()->route('makeprofile.create');
             // }
+            $request->fulfill();
 
+            $user = $request->user();
+
+            if (!$user->profile) {
+                return redirect()->route('makeprofile.create');
+            }
+
+            // return redirect()->route('index.afterlogin');
             // 登録済みなら index へ
             return redirect()->route('index.afterlogin');
         })->name('verified.redirect');

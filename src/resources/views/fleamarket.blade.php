@@ -44,9 +44,9 @@
         </a>
     </div>
     @endforeach
-
+</div>
 <div class="pagination">
     {{ $items->links() }}
 </div>
 
-</div>
+@endsection

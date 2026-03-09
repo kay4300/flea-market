@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginRequest;
 use App\Models\User;
 
+
 class LoginController extends Controller
 {
     // ログインフォーム表示
@@ -40,5 +41,18 @@ class LoginController extends Controller
         return back()->withErrors([
             'email' => 'メールアドレスまたはパスワードが正しくありません。',
         ])->withInput();
+    }
+
+    public function store(LoginRequest $request)
+    {
+        $user = auth()->user();
+        $profile = $user->profile;
+        
+
+        if (!$profile || !filled($profile->name) || !filled($profile->address)) {
+            return redirect()->route('makeprofile.create');
+        }
+
+        return redirect()->route('index.afterlogin');
     }
 }

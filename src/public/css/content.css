@@ -79,16 +79,34 @@
 }
 
 /* 購入ボタン */
+/* aタグをボタン風に表示 */
 .purchase-button {
+    display: block;
+    /* ブロック表示で縦並び */
     width: 100%;
-    background-color: #ff5a5a;
-    color: #fff;
-    border: none;
+    /* 親幅いっぱい */
+    max-width: 100%;
+    /* はみ出さない */
+    text-align: center;
+    /* 文字中央 */
     padding: 12px 0;
+    /* 高さ調整 */
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 30px;
+    color: #fff;
+    /* 文字色 */
+    background-color: #ff5a5a;
+    /* 背景色 */
+    border: none;
+    /* 枠線なし */
+    border-radius: 5px;
+    /* 角丸 */
+    text-decoration: none;
+    /* 下線を消す */
     cursor: pointer;
+    /* ホバー時にカーソルを変える */
+    margin-bottom: 30px;
+    /* コメントボタンとの間隔 */
 }
 
 /* セクション見出し */

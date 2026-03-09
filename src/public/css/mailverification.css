@@ -1,0 +1,43 @@
+/* 全体レイアウト */
+.container {
+    width: 720px;
+    margin: 100px auto 0;
+    text-align: center;
+}
+
+/* タイトル */
+.container h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 40px;
+}
+
+/* プロフィール作成ボタン */
+.btn-primary {
+    display: inline-block;
+
+    width: 257px;
+    height: 53px;
+    line-height: 53px;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+
+    text-align: center;
+    vertical-align: middle;
+
+    color: #000;
+    text-decoration: none;
+
+    background-color: #D9D9D9;
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+/* ホバー */
+.btn-primary:hover {
+    background-color: #c8c8c8;
+}

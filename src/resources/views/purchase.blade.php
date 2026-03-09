@@ -9,7 +9,7 @@
 @section('content')
 
 <!-- ヘッダー -->
-<header class="header">
+<!-- <header class="header">
     <div class="header__left">
         <input
             type="text"
@@ -23,7 +23,7 @@
 
     <a href="{{ route('mypage') }}">マイページ</a>
     <a href="{{ route('sell') }}">出品</a>
-</header>
+</header> -->
 
 <div class="purchase-container">
 
@@ -106,3 +106,5 @@
         result.textContent = select.value || '未選択';
     });
 </script>
+
+@endsection

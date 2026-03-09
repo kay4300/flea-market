@@ -1,51 +1,103 @@
-/* ヘッダー部分をここに記述する */
-
-/* 見出しタブ */
+/* タブ全体 */
 .tab {
+    width: 1512px;
+    /* 指定幅 */
+    height: 47px;
+    /* 指定高さ */
+    margin: 127px auto 0;
+    /* 上マージンを127pxにして中央寄せ */
     display: flex;
-    gap: 30px;
-    margin: 20px 0;
-}
-
-.tab__item {
-    font-size: 18px;
-    cursor: pointer;
-    color: #999;
-}
-
-.tab__item--active {
-    color: #000;
-    border-bottom: 2px solid #000;
-}
-
-/* 商品一覧 */
-.item-list {
-    display: flex;
+    justify-content: flex-start;
+    /* 左から並べる */
+    align-items: center;
     gap: 20px;
+    /* タブ間の間隔 */
+    opacity: 1;
 }
 
+/* タブリンク */
+.tab__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    /* タブ全体の高さに合わせる */
+    padding: 0 30px;
+    /* 左右に余白 */
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: #5f5f5f;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+}
+
+/* 選択中のタブ */
+.tab__item--active {
+    color: #FF5555;
+}
+
+/* ホバー時 */
+.tab__item:hover {
+    color: #000;
+}
+
+/* 商品一覧全体 */
+.item-list {
+    width: 1013px;
+    /* 指定幅 */
+    min-height: 320px;
+    /* 高さ */
+    margin: 20px auto 0;
+    /* 上マージン少し */
+    display: flex;
+    flex-wrap: wrap;
+    /* 複数列表示 */
+    gap: 20px;
+    /* 商品カード間の隙間 */
+    opacity: 1;
+    position: relative;
+    left: 69px;
+    /* 左位置 */
+}
+
+/* 商品カード */
 .item-card {
-    width: 30%;
+    width: 200px;
+    /* 1枚のカード幅 */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+    position: relative;
 }
 
+/* 売り切れラベル */
+.sold-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(255, 0, 0, 0.8);
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* 商品画像 */
 .item-card__image {
     width: 100%;
-    aspect-ratio: 1 / 1;
+    height: 150px;
     object-fit: cover;
 }
 
+/* 商品名 */
 .item-card__name {
-    margin-top: 8px;
-    font-size: 14px;
     text-align: center;
-}
-
-.tab-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.pagination {
-    margin-left: auto;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
 }

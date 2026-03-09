@@ -9,7 +9,7 @@
 @section('content')
 
 <!-- ヘッダー -->
-<header class="header">
+<!-- <header class="header">
     <div class="header__left">
         <input
             type="text"
@@ -23,7 +23,7 @@
 
     <a href="{{ route('mypage') }}">マイページ</a>
     <a href="{{ route('sell') }}">出品</a>
-</header>
+</header> -->
 
 <h2>マイページ</h2>
 <!-- マイページ ユーザー情報 -->
@@ -108,3 +108,5 @@
         @endforeach
     </div> -->
 </div>
+
+@endsection
