@@ -1,0 +1,149 @@
+/* ===============================
+   ページ全体
+================================ */
+
+.register-form__content {
+    width: 100%;
+    max-width: 680px;
+    margin: 80px auto;
+}
+
+/* ===============================
+   タイトル
+================================ */
+
+.register-form__heading {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.register-form__heading h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    color: #000;
+}
+
+
+/* ===============================
+   フォーム共通
+================================ */
+
+.form {
+    width: 100%;
+}
+
+.form__group {
+    margin-bottom: 35px;
+}
+
+.form__label--item {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.form__group-content {
+    margin-top: 8px;
+}
+
+
+/* ===============================
+   プロフィール画像
+================================ */
+
+.form__image-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.form__image-preview {
+    width: 150px;
+    height: 150px;
+    background: #D9D9D9;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* 画像ボタン */
+
+.form__image-button {
+    width: 180px;
+    height: 50px;
+    line-height: 50px;
+
+    text-align: center;
+
+    background: #FF5555;
+    border: 2px solid #FF5555;
+    border-radius: 10px;
+
+    color: #fff;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.form__image-button:hover {
+    opacity: 0.9;
+}
+
+
+/* ===============================
+   入力フォーム
+================================ */
+
+.form__input--text input {
+
+    width: 100%;
+    height: 60px;
+
+    border: 1px solid #5F5F5F;
+    border-radius: 5px;
+
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+
+/* ===============================
+   エラーメッセージ
+================================ */
+
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+
+/* ===============================
+   更新ボタン
+================================ */
+
+.form__button {
+    margin-top: 50px;
+}
+
+.form__button-submit {
+
+    width: 100%;
+    height: 60px;
+
+    background: #FF5555;
+    border: none;
+    border-radius: 5px;
+
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+
+    cursor: pointer;
+}
+
+.form__button-submit:hover {
+    opacity: 0.9;
+}

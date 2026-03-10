@@ -9,7 +9,7 @@
 @section('content')
 
 <!-- ヘッダー -->
-<header class="header">
+<!-- <header class="header">
     <div class="header__left">
         <input
             type="text"
@@ -23,7 +23,7 @@
 
     <a href="{{ route('mypage') }}">マイページ</a>
     <a href="{{ route('sell') }}">出品</a>
-</header>
+</header> -->
 
 <div class="register-form__content">
     <div class="register-form__heading">
@@ -36,21 +36,14 @@
         {{ method_field('PUT') }}
         <!-- @method('PUT') -->
         <div class="form__group">
-            <div class="form__group-title">
-                <span class="form__label--item">プロフィール画像</span>
-            </div>
+            
             <div class="form__group-content">
                 <div class="form__image-wrapper">
                     <img src="{{ $profile->profile_image ? asset('storage/'. $profile->profile_image) : asset('images/no-image.png') }}"
-                        alt="プロフィール画像"
-                        class="form__image-preview">
+                        alt="" class="form__image-preview">
                     <label class="form__image-button">
                         画像を選択する
-                        <input
-                            type="file"
-                            name="profile_image"
-                            accept="image/*"
-                            hidden>
+                        <input type="file" name="profile_image" accept="image/*" hidden>
                     </label>
                 </div>
                 <div class="form__error">

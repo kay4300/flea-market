@@ -17,9 +17,9 @@
     <form class="form" method="POST" action="{{ route('makeprofile.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form__group">
-            <div class="form__group-title">
+            <!-- <div class="form__group-title">
                 <span class="form__label--item">プロフィール画像</span>
-            </div>
+            </div> -->
             <div class="form__group-content">
                 <div class="form__image-wrapper">
                     <img src="{{ asset('storage/profile/' . $profile->profile_image) }}" alt=""

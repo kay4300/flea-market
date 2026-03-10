@@ -1,12 +1,17 @@
-.purchase-container {
+/* .purchase-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin-top: 40px;
-}
+    padding-left: 80px;
+    padding-right: 80px;
+    gap: 40px;
+    box-sizing: border-box;
+} */
 
 /* 左側 */
-.purchase-left {
-    width: 60%;
+/* .purchase-left {
+    width: 805px;
+    min-width: 100px;
 }
 
 .product-row {
@@ -52,11 +57,11 @@ hr {
     margin: 30px 0;
     border: none;
     border-top: 1px solid #ccc;
-}
+} */
 
 /* 右側 */
-.purchase-right {
-    width: 35%;
+/* .purchase-right {
+    width: 25%;
 }
 
 .summary-box {
@@ -83,4 +88,133 @@ hr {
     font-size: 16px;
     border: none;
     cursor: pointer;
+} */
+
+/* ===============================
+   全体コンテナ
+================================ */
+.purchase-container {
+    display: flex;
+    justify-content: flex-start;
+    /* 左寄せ */
+    margin-top: 40px;
+    padding-left: 80px;
+    /* 左端から80px */
+    gap: 40px;
+    /* 左右の間隔 */
+    box-sizing: border-box;
+}
+
+/* ===============================
+   左側
+================================ */
+.purchase-left {
+    width: 805px;
+    /* 指定の幅に合わせる */
+    min-width: 300px;
+    /* 左の位置は padding-left:80px で確保済み */
+}
+
+.product-row {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.product-image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    background: #eee;
+}
+
+.product-name {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.product-price {
+    font-size: 25px;
+}
+
+.payment-area select {
+    margin-top: 10px;
+    padding: 5px;
+    width: 200px;
+}
+
+.address-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.change-link {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+/* 左側ボーダーライン */
+.purchase-left hr {
+    width: 805px;
+    /* 左側ボーダー指定幅 */
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+/* ===============================
+   右側
+================================ */
+.summary-box {
+    position: absolute;
+    top: 173px;
+    left: 987px;
+    width: 440px;
+    height: 230px;
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.summary-row {
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    gap: 40px;
+    font-size: 20px;
+    border-bottom: 1px solid #ccc;
+    padding:0 10px;
+}
+/* 最後の行のボーダーを消す */
+.summary-row:last-child {
+    border-bottom: none;
+}
+/* ===============================
+   購入ボタンを絶対位置で配置
+================================ */
+.purchase-right form button {
+    position: absolute;
+    width: 440px;
+    /* 指定幅 */
+    height: 60px;
+    /* 指定高さ */
+    top: 469px;
+    /* 画面上からの位置 */
+    left: 987px;
+    /* 画面左からの位置 */
+    background-color: #ff5a5a;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.purchase-button:hover,
+.purchase-right form button:hover {
+    opacity: 0.9;
 }
