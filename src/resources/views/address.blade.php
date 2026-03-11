@@ -9,7 +9,7 @@
 @section('content')
 
 <!-- ヘッダー -->
-<header class="header">
+<!-- <header class="header">
     <div class="header__left">
         <input
             type="text"
@@ -23,15 +23,15 @@
 
     <a href="{{ route('mypage') }}">マイページ</a>
     <a href="{{ route('sell') }}">出品</a>
-</header>
+</header> -->
 
 <div class="register-form__content">
     <div class="register-form__heading">
-        <h1>住所変更</h1>
+        <h1>住所の変更</h1>
     </div>
 
     <!-- action="/register"→登録処理用のルートに送信 -->
-    <form class="form" method="POST" action="{{ route('address') }}">
+    <form class="form" method="POST" action="{{ route('address.update', ['item' => $item->id]) }}">
         @csrf
 
         <div class="form__group">
@@ -40,7 +40,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="postcode" value="{{ old('postcode') }}" />
+                    <input type="text" name="postcode" value="{{ old('postcode', $profile->postcode) }}" />
                 </div>
                 <div class="form__error">
                     @error('postcode')
@@ -56,7 +56,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="address" value="{{ old('address') }}" />
+                    <input type="text" name="address" value="{{ old('address', $profile->address) }}" />
                 </div>
                 <div class="form__error">
                     @error('address')
@@ -72,7 +72,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="building" />
+                    <input type="text" name="building" value="{{ old('building', $profile->building) }}" />
                 </div>
             </div>
         </div>

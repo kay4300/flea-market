@@ -1,18 +1,20 @@
 /* タブ全体 */
 .tab {
-    width: 1512px;
-    /* 指定幅 */
+    width: 100%;
+    max-width: 1512px;
+    /* PC指定幅最大 */
     height: 47px;
-    /* 指定高さ */
     margin: 127px auto 0;
-    /* 上マージンを127pxにして中央寄せ */
+    /* 上マージン127pxで中央寄せ */
     display: flex;
     justify-content: flex-start;
-    /* 左から並べる */
     align-items: center;
     gap: 20px;
-    /* タブ間の間隔 */
+    /* タブ間隔 */
     opacity: 1;
+    box-sizing: border-box;
+    padding: 0 20px;
+    /* 小画面時の左右余白 */
 }
 
 /* タブリンク */
@@ -21,9 +23,7 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    /* タブ全体の高さに合わせる */
     padding: 0 30px;
-    /* 左右に余白 */
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 18px;
@@ -45,27 +45,27 @@
 
 /* 商品一覧全体 */
 .item-list {
-    width: 1013px;
-    /* 指定幅 */
+    width: 100%;
+    max-width: 1013px;
+    /* 最大幅固定 */
     min-height: 320px;
-    /* 高さ */
     margin: 20px auto 0;
-    /* 上マージン少し */
     display: flex;
     flex-wrap: wrap;
-    /* 複数列表示 */
     gap: 20px;
-    /* 商品カード間の隙間 */
     opacity: 1;
     position: relative;
-    left: 69px;
-    /* 左位置 */
+    box-sizing: border-box;
+    padding: 0 20px;
+    /* 左右余白で中央寄せ */
 }
 
 /* 商品カード */
 .item-card {
-    width: 200px;
-    /* 1枚のカード幅 */
+    width: calc((100% - 60px) / 5);
+    /* 5列表示でgap20px ×4列分を引く */
+    max-width: 200px;
+    /* PC幅に合わせる */
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
@@ -100,4 +100,47 @@
     font-size: 16px;
     font-weight: 500;
     color: #333;
+}
+
+/* ===== メディアクエリ ===== */
+
+/* PC幅が1400px未満 */
+@media screen and (max-width: 1400px) {
+    .tab {
+        padding: 0 10px;
+        gap: 15px;
+    }
+
+    .item-list {
+        padding: 0 10px;
+        gap: 15px;
+    }
+
+    .item-card {
+        width: calc((100% - 60px) / 4);
+        /* 列数を4に減らす */
+        max-width: 180px;
+    }
+}
+
+/* さらに小さくなる場合の調整 */
+@media screen and (max-width: 1200px) {
+    .item-card {
+        width: calc((100% - 40px) / 3);
+        /* 列数3 */
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .item-card {
+        width: calc((100% - 20px) / 2);
+        /* 列数2 */
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .item-card {
+        width: 100%;
+        /* スマホは1列 */
+    }
 }

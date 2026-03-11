@@ -117,6 +117,8 @@ Route::middleware('auth')->group(
 
         // 画像・商品を保存
         Route::post('/sell', [ItemController::class, 'storeItem'])->name('items.store');
+
+        Route::post('/items/upload-image', [ItemController::class, 'uploadImage'])->name('items.uploadImage');
         
         // 購入画面を表示
         Route::get('/purchase/{item}', [PurchaseController::class, 'show'])
@@ -127,10 +129,10 @@ Route::middleware('auth')->group(
             ->name('purchase');
 
         // 住所変更画面表示
-        Route::get('/address/edit', [PurchaseController::class, 'editProfile'])->name('address.edit');
+        Route::get('/purchase/{item}/address/edit', [PurchaseController::class, 'editProfile'])->name('address.edit');
 
         // 住所更新処理
-        Route::post('/address/update', [PurchaseController::class, 'updateProfile'])->name('address.update');
+        Route::post('/purchase/{item}/address/update', [PurchaseController::class, 'updateProfile'])->name('address.update');
 
         // ログアウト
         Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');

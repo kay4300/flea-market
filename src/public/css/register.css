@@ -1,33 +1,45 @@
-/* 全体レイアウト */
+/* ===============================
+   全体レイアウト
+================================ */
 .register-form__content {
-    width: 500px;
+    width: 90%;
+    max-width: 500px;
     margin: 70px auto 0;
+    box-sizing: border-box;
 }
 
-/* タイトル */
+/* ===============================
+   タイトル
+================================ */
 .register-form__heading {
     text-align: center;
     margin-bottom: 30px;
 }
 
 .register-form__heading h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 32px;
-    font-weight: bold;
+    color: #000;
 }
 
-/* 各フォームグループの間隔 */
+/* ===============================
+   各フォームグループ
+================================ */
 .form__group {
     margin-bottom: 20px;
 }
 
-/* ラベル */
 .form__label--item {
     display: block;
     font-weight: bold;
     margin-bottom: 8px;
+    font-size: 16px;
 }
 
-/* 入力欄 */
+/* ===============================
+   入力欄
+================================ */
 .form__input--text input {
     width: 100%;
     height: 45px;
@@ -38,20 +50,23 @@
     font-size: 16px;
 }
 
-/* エラーメッセージ */
+/* ===============================
+   エラーメッセージ
+================================ */
 .form__error {
     color: red;
     font-size: 14px;
     margin-top: 5px;
 }
 
-/* ボタンエリア */
+/* ===============================
+   ボタンエリア
+================================ */
 .form__button {
     margin-top: 40px;
     text-align: center;
 }
 
-/* 登録ボタン */
 .form__button-submit {
     display: block;
     width: 100%;
@@ -60,7 +75,7 @@
     border-radius: 5px;
     background: #FF5555;
     color: #fff;
-    font-family: Inter, sans-serif;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 22px;
     border: none;
@@ -70,7 +85,13 @@
     margin-bottom: 20px;
 }
 
-/* ログインリンクはボタン風だが背景なし */
+.form__button-submit:hover {
+    opacity: 0.9;
+}
+
+/* ===============================
+   ログインリンクはボタン風
+================================ */
 a.form__button-submit {
     background: transparent;
     color: #0073ff;
@@ -79,4 +100,24 @@ a.form__button-submit {
     height: auto;
     line-height: normal;
     padding: 0;
+}
+
+/* ===============================
+   レスポンシブ対応
+================================ */
+@media screen and (max-width: 768px) {
+    .register-form__content {
+        width: 95%;
+        margin: 50px auto 0;
+    }
+
+    .register-form__heading h1 {
+        font-size: 28px;
+    }
+
+    .form__button-submit {
+        font-size: 20px;
+        height: 45px;
+        line-height: 45px;
+    }
 }

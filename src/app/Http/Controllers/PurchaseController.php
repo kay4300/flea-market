@@ -46,13 +46,14 @@ class PurchaseController extends Controller
         return redirect()->route('mypage');
     }
 
-    public function editProfile()
+    public function editProfile($itemId)
     {
         $profile = Profile::where('user_id', Auth::id())->firstOrFail();
-        return view('profile', compact('profile'));
+        $item = Item::findOrFail($itemId);
+        return view('address', compact('profile', 'item'));
     }
 
-    public function updateProfile(Request $request)
+    public function updateProfile(Request $request, $itemId)
     {
         $userId = Auth::id();
 
@@ -67,7 +68,7 @@ class PurchaseController extends Controller
         $profile->update($validated);
 
         // 更新後、購入ページに戻す
-        return redirect()->route('purchase.show', session('purchase_item_id'));
+        return redirect()->route('purchase.show', $itemId);
     }
 
     /**

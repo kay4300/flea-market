@@ -1,107 +1,13 @@
-/* .purchase-container {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 40px;
-    padding-left: 80px;
-    padding-right: 80px;
-    gap: 40px;
-    box-sizing: border-box;
-} */
-
-/* 左側 */
-/* .purchase-left {
-    width: 805px;
-    min-width: 100px;
-}
-
-.product-row {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-.product-image img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    background: #eee;
-}
-
-.product-name {
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.product-price {
-    font-size: 18px;
-}
-
-.payment-area select {
-    margin-top: 10px;
-    padding: 5px;
-    width: 200px;
-}
-
-.address-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.change-link {
-    color: #0066cc;
-    text-decoration: none;
-}
-
-hr {
-    margin: 30px 0;
-    border: none;
-    border-top: 1px solid #ccc;
-} */
-
-/* 右側 */
-/* .purchase-right {
-    width: 25%;
-}
-
-.summary-box {
-    border: 1px solid #ccc;
-}
-
-.summary-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-}
-
-.summary-row:last-child {
-    border-bottom: none;
-}
-
-.purchase-button {
-    width: 100%;
-    margin-top: 30px;
-    padding: 15px;
-    background-color: #ff5a5a;
-    color: #fff;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-} */
-
 /* ===============================
    全体コンテナ
 ================================ */
 .purchase-container {
     display: flex;
-    justify-content: flex-start;
-    /* 左寄せ */
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-top: 40px;
-    padding-left: 80px;
-    /* 左端から80px */
+    padding: 0 40px;
     gap: 40px;
-    /* 左右の間隔 */
     box-sizing: border-box;
 }
 
@@ -109,10 +15,8 @@ hr {
    左側
 ================================ */
 .purchase-left {
-    width: 805px;
-    /* 指定の幅に合わせる */
+    flex: 1 1 60%;
     min-width: 300px;
-    /* 左の位置は padding-left:80px で確保済み */
 }
 
 .product-row {
@@ -140,7 +44,8 @@ hr {
 .payment-area select {
     margin-top: 10px;
     padding: 5px;
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
 }
 
 .address-header {
@@ -154,10 +59,8 @@ hr {
     text-decoration: none;
 }
 
-/* 左側ボーダーライン */
 .purchase-left hr {
-    width: 805px;
-    /* 左側ボーダー指定幅 */
+    width: 100%;
     margin: 30px 0;
     border: none;
     border-top: 1px solid #ccc;
@@ -166,46 +69,45 @@ hr {
 /* ===============================
    右側
 ================================ */
+.purchase-right {
+    flex: 1 1 35%;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
 .summary-box {
-    position: absolute;
-    top: 173px;
-    left: 987px;
-    width: 440px;
-    height: 230px;
+    width: 100%;
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
     background: #fff;
+    box-sizing: border-box;
 }
 
 .summary-row {
-    flex:1;
+    flex: 1;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
-    gap: 40px;
+    padding: 15px 10px;
     font-size: 20px;
     border-bottom: 1px solid #ccc;
-    padding:0 10px;
 }
-/* 最後の行のボーダーを消す */
+
 .summary-row:last-child {
     border-bottom: none;
 }
+
 /* ===============================
-   購入ボタンを絶対位置で配置
+   購入ボタン
 ================================ */
-.purchase-right form button {
-    position: absolute;
-    width: 440px;
-    /* 指定幅 */
+.purchase-right form button,
+.purchase-button {
+    width: 100%;
     height: 60px;
-    /* 指定高さ */
-    top: 469px;
-    /* 画面上からの位置 */
-    left: 987px;
-    /* 画面左からの位置 */
     background-color: #ff5a5a;
     color: #fff;
     font-size: 20px;
@@ -214,7 +116,57 @@ hr {
     cursor: pointer;
 }
 
-.purchase-button:hover,
-.purchase-right form button:hover {
+.purchase-right form button:hover,
+.purchase-button:hover {
     opacity: 0.9;
+}
+
+/* ===============================
+   レスポンシブ
+================================ */
+@media screen and (max-width: 1540px) {
+    .purchase-container {
+        padding: 0 30px;
+        gap: 30px;
+    }
+
+    .product-price {
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .purchase-container {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .purchase-left,
+    .purchase-right {
+        width: 100%;
+    }
+
+    .summary-row {
+        font-size: 18px;
+    }
+
+    .product-price {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .product-image img {
+        width: 100%;
+        height: auto;
+    }
+
+    .payment-area select {
+        width: 100%;
+    }
 }

@@ -1,18 +1,17 @@
 /* ===============================
    ページ全体
 ================================ */
-
 .register-form__content {
-    width: 70%;
+    width: 100%;
     max-width: 680px;
-    margin: 0 auto;
-    margin-top: 60px;
+    margin: 60px auto 0;
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /* ===============================
    タイトル
 ================================ */
-
 .register-form__heading {
     text-align: center;
     margin-bottom: 50px;
@@ -25,11 +24,9 @@
     color: #000;
 }
 
-
 /* ===============================
    フォーム共通
 ================================ */
-
 .form {
     width: 100%;
 }
@@ -44,15 +41,14 @@
     margin-bottom: 10px;
 }
 
-
 /* ===============================
    プロフィール画像
 ================================ */
-
 .form__image-wrapper {
     display: flex;
     align-items: center;
     gap: 40px;
+    flex-wrap: wrap;
 }
 
 .form__image-preview {
@@ -64,33 +60,28 @@
 }
 
 .form__image-button {
-    width: 179px;
+    width: 100%;
+    max-width: 179px;
     height: 49px;
     line-height: 49px;
     text-align: center;
-
     background: #FF5555;
     border: 2px solid #FF5555;
     border-radius: 10px;
-
     color: #fff;
     font-weight: bold;
     cursor: pointer;
 }
 
-
 /* ===============================
    入力フォーム
 ================================ */
-
 .form__input--text input {
-
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
     height: 60px;
-
     border: 1px solid #5F5F5F;
     border-radius: 4px;
-
     padding-left: 15px;
     font-size: 16px;
 }
@@ -99,43 +90,77 @@
     margin-top: 10px;
 }
 
-
 /* ===============================
    エラーメッセージ
 ================================ */
-
 .form__error {
     color: red;
     font-size: 14px;
     margin-top: 5px;
 }
 
-
 /* ===============================
    登録ボタン
 ================================ */
-
 .form__button {
     margin-top: 40px;
+    text-align: center;
 }
 
 .form__button-submit {
-
-    width: 680px;
+    width: 100%;
+    max-width: 680px;
     height: 60px;
-
     background: #FF5555;
     border: none;
     border-radius: 5px;
-
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 26px;
     color: #fff;
-
     cursor: pointer;
 }
 
 .form__button-submit:hover {
     opacity: 0.9;
+}
+
+/* ===============================
+   レスポンシブ
+================================ */
+@media screen and (max-width: 1540px) {
+    .register-form__content {
+        padding: 0 15px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .register-form__heading h1 {
+        font-size: 32px;
+    }
+
+    .form__image-wrapper {
+        gap: 20px;
+    }
+
+    .form__input--text input,
+    .form__button-submit,
+    .form__image-button {
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .register-form__heading h1 {
+        font-size: 28px;
+    }
+
+    .form__input--text input,
+    .form__button-submit,
+    .form__image-button {
+        width: 100%;
+        font-size: 16px;
+        height: 50px;
+        line-height: 50px;
+    }
 }

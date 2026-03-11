@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 use App\Http\Requests\ContentRequest;
 use App\Models\Item;
@@ -133,9 +134,38 @@ class ItemController extends Controller
         // return back();
     }
     // 出品画面を表示
-    public function create()
+    public function create(Request $request)
     {
-        return view('sell');
+        $uploadedImage = $request->session()->get('uploaded_image');
+
+        return view('sell', compact('uploadedImage'));
+    }
+    // storage/app/public/items のファイル一覧
+    // $files = Storage::files('public/items');
+
+    // $images = [];
+    // foreach ($files as $file) {
+    //     $images[] = [
+    //         'url' => asset(str_replace('public/', 'storage/', $file)), // 表示用URL
+    //         'name' => basename($file), // ファイル名
+    //     ];
+    // }
+
+    // return view('sell', compact('images'));
+    // return view('sell');
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|max:2048',
+        ]);
+
+        $path = $request->file('image')->store('items', 'public');
+
+        // アップロード画像のパスをセッションに保存
+        $request->session()->put('uploaded_image', $path);
+
+        // 画像アップロード後に元の出品画面にリダイレクト
+        return redirect()->route('sell');
     }
     // 出品する画像と商品名を保存
     public function storeItem(Request $request)
@@ -154,7 +184,8 @@ class ItemController extends Controller
             $path = $request->file('image')->store('items', 'public');
             // 既存画像があればそのパスを使用
         } else if ($request->input('existing_image')) {
-            $path = $request->input('existing_image');
+            $path = str_replace('/storage/', '', parse_url($request->input('existing_image'), PHP_URL_PATH));
+            // $path = $request->input('existing_image');
         }
 
         // 価格を数値化

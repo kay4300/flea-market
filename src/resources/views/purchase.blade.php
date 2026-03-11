@@ -60,7 +60,7 @@
         <div class="address-area">
             <div class="address-header">
                 <h3>配送先</h3>
-                <a href="{{ route('address.edit') }}" class="change-link">変更する</a>
+                <a href="{{ route('address.edit', ['item' => $item->id]) }}" class="change-link">変更する</a>
             </div>
 
             <p>〒{{ $profile->postcode }}</p>

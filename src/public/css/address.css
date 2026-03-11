@@ -1,0 +1,127 @@
+/* 全体コンテナ */
+.register-form__content {
+    max-width: 680px;
+    /* フォーム最大幅 */
+    margin: 0 auto;
+    padding: 128px 20px 0 20px;
+    /* 上:128px, 左右余白20px */
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+/* タイトル h1 */
+/* h1タイトル（住所変更） */
+.register-form__heading h1 {
+    width: 180px;
+    height: 22px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 36px;
+    line-height: 100%;
+    letter-spacing: 0;
+    text-align: center;
+    margin: 0 auto 50px auto;
+    opacity: 1;
+    color: #000000;
+    display: flex;
+    align-items: center;
+    /* 高さ44px内で文字中央 */
+    justify-content: center;
+    /* 横中央 */
+}
+
+/* 入力グループ */
+.form__group {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+/* ラベル */
+.form__group-title span.form__label--item {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #000;
+}
+
+/* 入力セル */
+.form__input--text input {
+    width: 100%;
+    /* 親幅に合わせる */
+    max-width: 680px;
+    /* 最大幅固定 */
+    height: 45px;
+    padding: 0 12px;
+    border-radius: 4px;
+    border: 1px solid #5F5F5F;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    background: #FFFFFF;
+    box-sizing: border-box;
+}
+
+/* エラーメッセージ */
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+/* 更新ボタン */
+.form__button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.form__button-submit {
+    width: 100%;
+    /* 親幅に合わせる */
+    max-width: 680px;
+    height: 60px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF5555;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 60px;
+    /* 縦中央 */
+    text-align: center;
+    cursor: pointer;
+    opacity: 1;
+    transition: background 0.3s;
+}
+
+.form__button-submit:hover {
+    background-color: #FF7777;
+}
+
+/* メディアクエリ: PC幅が1400px未満のとき */
+@media screen and (max-width: 1400px) {
+    .register-form__content {
+        padding: 128px 10px 0 10px;
+    }
+
+    .form__input--text input,
+    .form__button-submit {
+        max-width: 90%;
+        /* 少し余白を残して縮小 */
+    }
+
+    .register-form__heading h1 {
+        font-size: 32px;
+        width: auto;
+        margin-bottom: 40px;
+    }
+}
+
+/* メディアクエリ: 画面幅1540px以上は中央固定 */
+@media screen and (min-width: 1540px) {
+    .register-form__content {
+        max-width: 680px;
+    }
+}

@@ -36,7 +36,7 @@
         {{ method_field('PUT') }}
         <!-- @method('PUT') -->
         <div class="form__group">
-            
+
             <div class="form__group-content">
                 <div class="form__image-wrapper">
                     <img src="{{ $profile->profile_image ? asset('storage/'. $profile->profile_image) : asset('images/no-image.png') }}"

@@ -1,28 +1,26 @@
 /* ===============================
-全体
-=============================== */
-
+   全体
+================================ */
 body {
     background: #fff;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
 /* ===============================
-ユーザー情報
-=============================== */
-
+   ユーザー情報
+================================ */
 .mypage-user {
-    width: 1017px;
-    height: 50px;
+    width: 100%;
+    max-width: 1017px;
+    height: auto;
     margin: 80px auto 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 /* ユーザー画像 */
-
 .mypage-user__image img {
     width: 120px;
     height: 120px;
@@ -31,7 +29,6 @@ body {
 }
 
 /* ユーザー名 */
-
 .mypage-user__name {
     flex: 1;
     text-align: center;
@@ -40,7 +37,6 @@ body {
 }
 
 /* 編集ボタン */
-
 .edit-button {
     padding: 10px 24px;
     border: 2px solid #FF5555;
@@ -48,7 +44,7 @@ body {
     border-radius: 6px;
     text-decoration: none;
     font-weight: bold;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .edit-button:hover {
@@ -56,18 +52,16 @@ body {
     color: white;
 }
 
-
 /* ===============================
-タブ
-=============================== */
-
+   タブ
+================================ */
 .tab {
-    width: 1512px;
+    width: 100%;
+    max-width: 1512px;
     margin: 0 auto;
 }
 
 /* radio非表示 */
-
 .tab input {
     display: none;
 }
@@ -75,6 +69,7 @@ body {
 .tab-labels {
     display: flex;
     border-bottom: 2px solid #ddd;
+    flex-wrap: wrap;
 }
 
 .tab-labels label {
@@ -82,11 +77,10 @@ body {
     cursor: pointer;
     font-size: 18px;
     color: #555;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 /* 選択タブ */
-
 #tab-sell:checked~.tab-labels label[for="tab-sell"],
 #tab-purchased:checked~.tab-labels label[for="tab-purchased"] {
     color: #FF5555;
@@ -94,13 +88,12 @@ body {
     font-weight: bold;
 }
 
-
 /* ===============================
-タブコンテンツ
-=============================== */
-
+   タブコンテンツ
+================================ */
 .tab-content {
-    width: 1374px;
+    width: 100%;
+    max-width: 1374px;
     margin: 40px auto;
 }
 
@@ -109,33 +102,28 @@ body {
 }
 
 /* タブ切替 */
-
-#tab-sell:checked~.tab-content #pane-sell {
-    display: block;
-}
-
+#tab-sell:checked~.tab-content #pane-sell,
 #tab-purchased:checked~.tab-content #pane-purchased {
     display: block;
 }
 
-
 /* ===============================
-商品一覧
-=============================== */
-
+   商品一覧
+================================ */
 .item-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
+    width: 100%;
+    max-width: 1374px;
+    margin: 0 auto;
 }
 
-
 /* ===============================
-商品カード
-=============================== */
-
+   商品カード
+================================ */
 .item-card {
-    transition: .25s;
+    transition: 0.25s;
 }
 
 .item-card:hover {
@@ -148,7 +136,6 @@ body {
 }
 
 /* 商品画像 */
-
 .item-card__image {
     width: 100%;
     height: 260px;
@@ -158,16 +145,81 @@ body {
 }
 
 /* 商品名 */
-
 .item-card__name {
     margin-top: 10px;
     font-size: 16px;
 }
 
 /* 価格 */
-
 .item-card__price {
     margin-top: 4px;
     font-size: 17px;
     font-weight: bold;
+}
+
+/* ===============================
+   レスポンシブ
+================================ */
+@media screen and (max-width: 1540px) {
+    .mypage-user {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .tab {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .tab-content {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .item-list {
+        max-width: 100%;
+        gap: 20px;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .mypage-user__name {
+        font-size: 24px;
+    }
+
+    .tab-labels label {
+        font-size: 16px;
+        padding: 12px 20px;
+    }
+
+    .item-card__image {
+        height: 220px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .item-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .mypage-user {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .tab-labels {
+        flex-direction: column;
+        border-bottom: none;
+    }
+
+    .tab-labels label {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .item-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
 }

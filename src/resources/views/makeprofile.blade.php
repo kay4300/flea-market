@@ -26,11 +26,7 @@
                         class="form__image-preview">
                     <label class="form__image-button">
                         画像を選択する
-                        <input
-                            type="file"
-                            name="image"
-                            accept="image/*"
-                            hidden>
+                        <input type="file" name="image" accept="image/*" hidden>
                     </label>
                 </div>
                 <div class="form__error">
