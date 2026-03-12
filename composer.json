@@ -1,5 +1,5 @@
 {
-    "require-dev": {
-        "laravel-lang/lang": "^12.17"
+    "require": {
+        "laravel-lang/lang": "^10"
     }
 }

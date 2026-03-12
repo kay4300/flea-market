@@ -20,7 +20,7 @@ services:
 
   mysql:
     image: mysql:8.0.26
-    environment:
+    environment:docker ps
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: laravel_db
       MYSQL_USER: laravel_userlaravel_db

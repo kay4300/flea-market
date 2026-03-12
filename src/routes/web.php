@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MakeProfileController;
 use App\Http\Controllers\ItemController;
@@ -33,6 +34,13 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     $user = Auth::user();
     $profile = $user->profile;
     })->middleware(['auth', 'signed'])->name('verification.verify');
+
+    // メール認証再送
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('status', 'verification-link-sent');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // 登録済みならindexへ
 Route::get('/index', function () {

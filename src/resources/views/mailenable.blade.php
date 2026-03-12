@@ -36,7 +36,7 @@
     </div>
 
     <div class="verify__resend">
-        <form method="POST" action="{{ route('verification.send') }}">
+        <form method="post" action="{{ route('verification.send') }}">
             @csrf
             <button type="submit" class="verify__resend-link">
                 認証メールを再送する
