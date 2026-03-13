@@ -18,7 +18,7 @@ class LoginController extends Controller
     // ログイン処理
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
+        $credentials = $request->validated();
 
         // 認証成功。セキュリティ用にセッション再生成
         if (Auth::attempt($credentials)) {
@@ -39,7 +39,7 @@ class LoginController extends Controller
         }
         // 認証失敗
         return back()->withErrors([
-            'email' => 'メールアドレスまたはパスワードが正しくありません。',
+            'email' =>  __('auth.failed'),
         ])->withInput();
     }
 

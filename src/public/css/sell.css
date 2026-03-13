@@ -1,0 +1,197 @@
+/* sell.css レスポンシブ対応版 */
+
+/* ページ全体のコンテナ */
+.register-form__content {
+    max-width: 1200px;
+    /* 最大幅固定 */
+    width: 90%;
+    /* 小さい画面は画面幅の90% */
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+/* h1 タイトル */
+.register-form__heading h1 {
+    width: 100%;
+    max-width: 180px;
+    /* デザイン上の最大幅 */
+    height: auto;
+    font-size: 2.25rem;
+    /* 36px */
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 40px auto;
+}
+
+/* 商品画像 */
+.form__image-wrapper {
+    width: 100%;
+    max-width: 680px;
+    height: auto;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.form__image-preview {
+    width: 100%;
+    height: 186px;
+    /* 高さ固定 */
+    object-fit: cover;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+}
+
+.form__image-button {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #fff;
+    padding: 6px 12px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* エラー表示 */
+.form__error {
+    color: red;
+    font-size: 0.875rem;
+    /* 14px */
+    margin-top: 4px;
+}
+
+/* セクションタイトル */
+.section-title {
+    width: 100%;
+    max-width: 680px;
+    font-size: 1.5rem;
+    /* 24px */
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 40px 0 20px 0;
+    background-color: #5F5F5F;
+    color: #FFFFFF;
+    padding: 8px 12px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+}
+
+/* カテゴリー */
+.category-select {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    max-width: 680px;
+    border: 1px solid #5F5F5F;
+    padding: 10px;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.category-label {
+    padding: 6px 10px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* 商品状態セレクト */
+#condition {
+    width: 100%;
+    max-width: 680px;
+    height: 40px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+/* 入力欄（商品名・ブランド・価格・コメント） */
+.form__input--text input,
+textarea.comment-textarea {
+    width: 100%;
+    max-width: 680px;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    padding: 10px;
+    font-size: 1.625rem;
+    /* 26px */
+    font-weight: 700;
+    background-color: #FFFFFF;
+    color: #000000;
+    box-sizing: border-box;
+}
+
+textarea.comment-textarea {
+    height: 161px;
+    resize: none;
+}
+
+/* フォームグループ間隔 */
+.form__group {
+    margin-bottom: 20px;
+}
+
+/* 出品ボタン */
+.form__button-submit {
+    width: 100%;
+    max-width: 680px;
+    height: 60px;
+    background-color: #FFFFFF;
+    border: 1px solid #5F5F5F;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1.625rem;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.form__button-submit:hover {
+    background-color: #f0f0f0;
+}
+
+/* ラベル間隔 */
+.form__group-title {
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+/* メディアクエリ：小さい画面用 */
+@media screen and (max-width: 768px) {
+    .register-form__content {
+        width: 95%;
+    }
+
+    .form__image-wrapper,
+    #condition,
+    .form__input--text input,
+    textarea.comment-textarea,
+    .form__button-submit {
+        max-width: 100%;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+}
+
+/* メディアクエリ：PC幅（1400-1540px） */
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .register-form__content {
+        width: 1200px;
+        /* 固定で中央揃え */
+    }
+
+    .form__image-wrapper,
+    #condition,
+    .form__input--text input,
+    textarea.comment-textarea,
+    .form__button-submit {
+        width: 680px;
+    }
+}

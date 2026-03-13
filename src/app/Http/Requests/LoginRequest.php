@@ -41,4 +41,13 @@ class LoginRequest extends FormRequest
 
         ];
     }
+
+    // :attribute を日本語に置き換え
+    public function attributes()
+    {
+        return [
+            'email' => 'メールアドレス',
+            'password' => 'パスワード',
+        ];
+    }
 }
