@@ -44,8 +44,9 @@
 
 .form__image-button {
     position: absolute;
-    bottom: 10px;
-    left: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: #fff;
     padding: 6px 12px;
     border: 1px solid #5F5F5F;
@@ -70,11 +71,14 @@
     font-weight: 700;
     line-height: 1.2;
     margin: 40px 0 20px 0;
-    background-color: #5F5F5F;
-    color: #FFFFFF;
-    padding: 8px 12px;
-    border: 1px solid #5F5F5F;
-    border-radius: 4px;
+    color: #000000;
+    padding-bottom: 8px;
+    border-bottom: 5px solid #5F5F5F;
+}
+
+/* checkboxを非表示 */
+.category-checkbox {
+    display: none;
 }
 
 /* カテゴリー */
@@ -84,18 +88,27 @@
     gap: 10px;
     width: 100%;
     max-width: 680px;
-    border: 1px solid #5F5F5F;
+    /* border: 1px solid #5F5F5F; */
     padding: 10px;
-    border-radius: 4px;
-    box-sizing: border-box;
+    /* border-radius: 4px; */
+    /* box-sizing: border-box; */
 }
 
 .category-label {
     padding: 6px 10px;
-    border: 1px solid #5F5F5F;
-    border-radius: 4px;
+    border: 1px solid #FF5555;
+    border-radius: 18px;
     background-color: #FFFFFF;
     cursor: pointer;
+    color: #FF5555;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* 選択されたとき */
+.category-checkbox:checked+.category-label {
+    background-color: #FF5655;
+    color: #FFFFFF;
 }
 
 /* 商品状態セレクト */
@@ -106,8 +119,13 @@
     border: 1px solid #5F5F5F;
     border-radius: 4px;
     padding: 6px 10px;
-    font-size: 16px;
+    font-size: 12px;
     margin-top: 5px;
+
+}
+
+#condition:focus {
+    background-color: #f0f0f0;
 }
 
 /* 入力欄（商品名・ブランド・価格・コメント） */
@@ -118,7 +136,7 @@ textarea.comment-textarea {
     border: 1px solid #5F5F5F;
     border-radius: 4px;
     padding: 10px;
-    font-size: 1.625rem;
+    font-size: 12px;
     /* 26px */
     font-weight: 700;
     background-color: #FFFFFF;
@@ -141,14 +159,15 @@ textarea.comment-textarea {
     width: 100%;
     max-width: 680px;
     height: 60px;
-    background-color: #FFFFFF;
-    border: 1px solid #5F5F5F;
+    background-color: #FF5555;
+    border: 1px solid #FF5555;
     border-radius: 4px;
     font-weight: 700;
     font-size: 1.625rem;
     text-align: center;
     cursor: pointer;
     margin-top: 20px;
+    color: #FFFFFF
 }
 
 .form__button-submit:hover {

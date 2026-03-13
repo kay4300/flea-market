@@ -56,7 +56,7 @@
 
         <div class="category-select">
             @foreach ($allCategories as $index => $category)
-            <input type="checkbox" id="category_{{ $index }}" name="categories[]"
+            <input type="checkbox" id="category_{{ $category->id }}" name="categories[]"
                 value="{{ $category->id }}"
                 {{ in_array($category->id, $selectedCategories) ? 'checked' : '' }}
                 class="category-checkbox">

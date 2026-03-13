@@ -146,10 +146,11 @@ Route::middleware('auth')->group(
         Route::post('/logout', [MakeProfileController::class, 'logout'])->name('logout');
     }
 );
+// 商品検索
+Route::get('/search', [ItemController::class, 'search'])->name('items.search');
 
 // 商品詳細画面
 Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
-
 
 // トップページ（ログイン前・ログイン後共通）
 Route::get('/', [ItemController::class, 'index'])->name('top');

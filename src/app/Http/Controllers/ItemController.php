@@ -223,4 +223,13 @@ class ItemController extends Controller
 
         return view('mypage', compact('sellItems', 'purchasedItems'));
     }
+    
+    public function search(Request $request)
+    {
+        $keyword = $request->keyword;
+
+        $items = Item::where('name', 'like', "%{$keyword}%")->get();
+
+        return view('index', compact('items'));
+    }
 }

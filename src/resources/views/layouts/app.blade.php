@@ -22,7 +22,9 @@
             <!-- 検索バー（全ページ共通なら中央、特定ページだけ表示可） -->
             @unless(in_array(Route::currentRouteName(), ['login', 'register', 'mailenable', 'mailverification']))
             <div class="header__search-wrapper">
-                <input type="text" class="header__search" placeholder="何をお探しですか？">
+                <form action="{{ route('items.search') }}" method="GET">
+                    <input type="text" name="keyword" class="header__search" placeholder="何をお探しですか？" value="{{ request('keyword') }}">
+                </form>
             </div>
             @endunless
             <!-- 右側ナビは特定ページのみ表示 -->
