@@ -13,11 +13,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PurchaseController;
 use App\Models\Item;
 
-// 登録フォーム表示
-// Route::get('/register', function () {
-//     return view('register');
-// })->middleware('guest')->name('register');
-
 // メール認証誘導画面
 Route::get('/mailenable', function () {
     return view('mailenable');})->middleware('auth')->name('mailenable');
@@ -35,12 +30,20 @@ Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     $profile = $user->profile;
     })->middleware(['auth', 'signed'])->name('verification.verify');
 
-    // メール認証再送
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
+// メール認証再送
 
-    return back()->with('status', 'verification-link-sent');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+// メール認証再送（開発環境用）
+Route::post('/email/verification-notification', [EmailVerifiedRedirectController::class, 'resend'])
+    ->name('verification.send');
+
+// メール認証後リダイレクト
+Route::get('/email/verified-redirect', [EmailVerifiedRedirectController::class, 'redirect'])
+    ->name('verification.redirect');
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+
+//     return back()->with('status', 'verification-link-sent');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // 登録済みならindexへ
 Route::get('/index', function () {

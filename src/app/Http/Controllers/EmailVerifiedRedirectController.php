@@ -22,7 +22,16 @@ class EmailVerifiedRedirectController extends Controller
         // あれば通常のトップへ
         return redirect()->route('index.afterlogin');
     }
-        
+
+    public function resend(Request $request)
+    {
+        // 開発環境ではメール送信せずビューへ遷移
+        return view('mailverification');
+    }
+
+
+    
+                
         // // プロフィールがなければ作成ページへ
         // return redirect()->route('makeprofile.create');
         // ① Eloquent（profilesテーブル）

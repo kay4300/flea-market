@@ -105,17 +105,17 @@ class ItemController extends Controller
     {
         // eager loadingでcommentsとusersの情報をまとめて取得。$item->comments→ commentテーブルのデータ    
         $item->load(['user', 'categories', 'comments.user']);
-        $item->loadCount('comments');
+        $item->loadCount(['comments', 'likedUsers']);
 
         // ログインしている場合のみ、いいね済みか判定
         $isLiked = Auth::check()
             ? Auth::user()->likedItems()->where('item_id', $item->id)->exists()
             : false;
         // いいね数を取得
-        $likesCount = $item->likedUsers()->count();
+        // $likesCount = $item->likedUsers()->count();
         // $item->loadCount(['comments', 'likedUsers']);
 
-        return view('content', compact('item', 'isLiked', 'likesCount'));
+        return view('content', compact('item', 'isLiked'));
     }
     // 未ログイン画面からコメント送信したときのエラー処理
     public function store(ContentRequest $request, Item $item)

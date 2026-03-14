@@ -36,10 +36,8 @@
         <!-- いいね・コメント -->
         <div class="reaction">
             <div class="reaction__item">
-                <span class="reaction__count">{{ $item->liked_users_count }}
-                </span>
                 @auth
-                <form action="{{ $isLiked ? route('items.unlike', $item->id) : route('items.like', $item->id) }}" method="POST" style="display:inline;">
+                <form action="{{ $isLiked ? route('items.unlike', $item->id) : route('items.like', $item->id) }}" method="POST">
                     @csrf
                     @if($isLiked)
                     @method('DELETE')
@@ -48,8 +46,8 @@
                     <button type="submit">❤️</button>
                     @endif
                 </form>
+                <span class="reaction__count">{{ $item->liked_users_count }}</span>
                 @endauth
-
             </div>
 
             <div class="reaction__item">

@@ -1,3 +1,46 @@
+/* ===== いいね・コメント ===== */
+
+.reaction {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.reaction__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+}
+
+.reaction__icon {
+    font-size: 22px;
+}
+
+.reaction__count {
+    font-size: 18px;
+    color: #333;
+}
+
+/* いいねボタン */
+.reaction__item button {
+    border: none;
+    background: none;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* hover */
+.reaction__item button:hover {
+    transform: scale(1.1);
+}
+
+/* フォームを横並び */
+.reaction__item form {
+    display: inline;
+}
+
 /* モーダル背景 */
 .modal {
     display: none;
