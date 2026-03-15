@@ -8,23 +8,6 @@
 
 @section('content')
 
-<!-- ヘッダー -->
-<!-- <header class="header">
-    <div class="header__left">
-        <input
-            type="text"
-            class="header__search"
-            placeholder="何をお探しですか？">
-    </div>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">ログアウト</button>
-    </form>
-
-    <a href="{{ route('mypage') }}">マイページ</a>
-    <a href="{{ route('sell') }}">出品</a>
-</header> -->
-
 <div class="register-form__content">
     <div class="register-form__heading">
         <h1>プロフィール設定</h1>

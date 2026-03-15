@@ -86,6 +86,46 @@
     box-sizing: border-box;
 }
 
+.pagination-wrapper {
+    position: fixed;
+    /* 画面下に固定 */
+    bottom: 20px;
+    /* 下から20px */
+    left: 50%;
+    /* 左端を50%に */
+    transform: translateX(-50%);
+    /* 真ん中に移動 */
+    z-index: 1000;
+    /* 他要素より前面 */
+    background-color: white;
+    /* 背景色を白に */
+    padding: 8px 12px;
+    /* 任意の余白 */
+    border-radius: 5px;
+    /* 任意の角丸 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* optional */
+}
+
+.pagination-wrapper .paginate{
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    padding-left: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+}
+
+.pagination-wrapper .page-item {
+    margin: 0 5px !important;
+    /* ページ間の余白 */
+}
+
+.pagination-wrapper .page-link {
+    display: block !important;
+    /* リンクがブロック表示 */
+}
+
 /* ===============================
    メディアクエリ: PC幅1400px〜1540px対応
 ================================ */

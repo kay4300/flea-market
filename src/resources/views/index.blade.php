@@ -61,7 +61,7 @@
     @endforeach
 </div>
 
-<div class="pagination">
+<div class="pagination-wrapper">
     {{ $items->appends(['tab' => $tab])->links() }}
 </div>
 
