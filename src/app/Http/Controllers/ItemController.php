@@ -34,10 +34,22 @@ class ItemController extends Controller
         } else {
 
             // $items = Item::latest()->paginate(7);
-            $items = Item::with('categories')->latest()->paginate(7);
+            $items = Item::with('categories')
+                ->where('user_id', '!=', Auth::id())
+                ->latest()
+                ->paginate(7);
         }
 
         return view('index', compact('items', 'tab'));
+
+        // // ログイン済みの場合は自分が出品した商品を表示させない
+        // $query = Item::with('categories')->latest();
+
+        // if (Auth::check()) {
+        //     $query->where('user_id', '!=', Auth::id());
+        // }
+
+        // $items = $query->paginate(7);
 
         // ログインしている場合のみ、いいね済みIDを取得
         // $likedItemIds = Auth::check()

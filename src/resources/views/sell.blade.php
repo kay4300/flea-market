@@ -24,23 +24,24 @@
             <!-- 商品の画像を選択して表示 -->
             <div class="form__image-wrapper">
                 <img src="{{ asset('images/no-image.png') }}" alt="" class="form__image-preview">
-                <label class="form__image-button">画像を選択</label>
+                <label for="image" class="form__image-button">画像を選択</label>
+                <input type="file" name="image" id="image" accept="image/*" hidden>
             </div>
-            <input type="file" name="image" accept="image/*" hidden>
+
         </div>
         <div class="form__error">
             @error('image')
             {{ $message }}
             @enderror
         </div>
-    
+
         <h2 class="section-title">商品の詳細</h2>
         <div class="form__group">
             <div class="form__group-title">
                 <span class="form__label--item">カテゴリー</span>
-            </div>  
+            </div>
         </div>
-    <!-- @php
+        <!-- @php
             $categories = [
             'ファッション', '家電', 'インテリア', 'レディース', 'メンズ',
             'コスメ', '本', 'ゲーム', 'スポーツ', 'キッチン',
@@ -48,7 +49,7 @@
             ];
             $selectedCategories = old('categories', []);
             @endphp -->
-    <!-- DBから全カテゴリーを取得 -->
+        <!-- DBから全カテゴリーを取得 -->
         @php
         $allCategories = \App\Models\Category::all();
         $selectedCategories = old('categories', []);
@@ -64,6 +65,11 @@
                 {{ $category->name }}
             </label>
             @endforeach
+            <div class="form__error">
+                @error('categories')
+                {{ $message }}
+                @enderror
+            </div>
         </div>
 
         <div class="form__group">
@@ -109,7 +115,7 @@
                 <div class="form__input--text">
                     <input type="text" name="brand" value="{{ old('brand') }}" />
                 </div>
-            </div>    
+            </div>
         </div>
         <div class="form__error">
             @error('brand')
@@ -152,6 +158,6 @@
             <button class="form__button-submit" type="submit">出品する</button>
         </div>
     </form>
-</div> 
+</div>
 
 @endsection
