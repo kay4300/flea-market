@@ -1,5 +1,6 @@
 {
     "require": {
-        "laravel-lang/lang": "^10"
+        "laravel-lang/lang": "^10",
+        "stripe/stripe-php": "^19.4"
     }
 }

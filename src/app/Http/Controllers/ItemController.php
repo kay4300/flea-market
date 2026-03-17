@@ -16,12 +16,13 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $tab = $request->query('tab', 'recommend'); // デフォルト: おすすめ
+        $keyword = $request->query('keyword');
 
         if (!Auth::check()) {
             // 未ログイン → おすすめのみ表示
             // $items = Item::latest()->paginate(7);
             $items = Item::with('categories')->latest()->paginate(7);
-            return view('index', compact('items', 'tab'));
+       
         }
         // ログイン済み
         if ($tab === 'wishlist') {
@@ -31,6 +32,7 @@ class ItemController extends Controller
                 ->with('categories')
                 ->latest()
                 ->paginate(7);
+                
         } else {
 
             // $items = Item::latest()->paginate(7);
@@ -38,10 +40,10 @@ class ItemController extends Controller
                 ->where('user_id', '!=', Auth::id())
                 ->latest()
                 ->paginate(7);
-        }
-
+        }    
         return view('index', compact('items', 'tab'));
-
+        
+    }    
         // // ログイン済みの場合は自分が出品した商品を表示させない
         // $query = Item::with('categories')->latest();
 
@@ -91,7 +93,7 @@ class ItemController extends Controller
         // return view('index', compact('items', 'tab'));
 
         // return redirect()->route('index.afterlogin', ['items' => $tab]);
-    }
+    
     public function like(Item $item)
     {
         $user = Auth::user();

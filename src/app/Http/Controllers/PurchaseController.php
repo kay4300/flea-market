@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Profile;
 use App\Models\Item;
+use Stripe\Stripe;
+use Stripe\Checkout\Session;
 
 class PurchaseController extends Controller
 {
@@ -93,16 +95,51 @@ class PurchaseController extends Controller
     {
         $item = Item::findOrFail($id);
 
-        if ($item->is_sold) {
-            return back();
-        }
+        Stripe::setApiKey(config('services.stripe.secret'));
 
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price, // 円（例: 1000）
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => url('/'),   // とりあえずトップでOK
+            'cancel_url' => url('/'),
+            'metadata' => ['item_id' => $item->id],
+        ]);
+
+        // ② Stripe 画面に遷移した時点で購入データを登録
+        $purchase = Purchase::create([
+            'user_id' => Auth::id(),
+            'item_id' => $item->id,
+            'stripe_session_id' => $session->id,
+            'amount' => $item->price,
+        ]);
+
+        // ③ 商品に sold フラグを立てる
         $item->is_sold = true;
-        $item->buyer_id = auth()->id();
         $item->save();
 
-        return redirect()->route('purchase.show', $item->id);
+        return redirect($session->url);
     }
+
+    //     if ($item->is_sold) {
+    //         return back();
+    //     }
+
+    //     $item->is_sold = true;
+    //     $item->buyer_id = auth()->id();
+    //     $item->save();
+
+    //     return redirect()->route('purchase.show', $item->id);
+    // }
 
 
     /**

@@ -37,7 +37,7 @@
         おすすめ
     </a>
 
-    <a href="{{ route('index.afterlogin', ['tab' => 'wishlist']) }}"
+    <a href="{{ route('index.afterlogin', ['tab' => 'wishlist', 'keyword' => request('keyword')]) }}"
         class="tab__item {{ request('tab') === 'wishlist' ? 'tab__item--active' : '' }}">
         マイリスト
     </a>

@@ -139,6 +139,10 @@ Route::middleware('auth')->group(
         Route::post('/purchase/{item}', [PurchaseController::class, 'purchase'])
             ->name('purchase');
 
+        // 購入成功画面
+        Route::get('/purchase/success', [PurchaseController::class, 'success'])
+            ->name('purchase.success');    
+
         // 住所変更画面表示
         Route::get('/purchase/{item}/address/edit', [PurchaseController::class, 'editProfile'])->name('address.edit');
 

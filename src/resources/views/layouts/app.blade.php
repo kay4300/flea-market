@@ -22,8 +22,9 @@
             <!-- 検索バー（全ページ共通なら中央、特定ページだけ表示可） -->
             @unless(in_array(Route::currentRouteName(), ['login', 'register', 'mailenable', 'mailverification']))
             <div class="header__search-wrapper">
-                <form action="{{ route('items.search') }}" method="GET">
+                <form action="{{ route('index.afterlogin') }}" method="GET">
                     <input type="text" name="keyword" class="header__search" placeholder="何をお探しですか？" value="{{ request('keyword') }}">
+                    <button type="submit" style="display:none;"></button>
                 </form>
             </div>
             @endunless

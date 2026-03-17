@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Item;
 use App\Models\Profile;
+use App\Models\Purchase;
 
 class MypageController extends Controller
 {
@@ -33,14 +34,19 @@ class MypageController extends Controller
         $userId = auth()->id();
 
         // 購入済み商品
-        $purchasedItems = Item::where('buyer_id', $userId)->get();
+        // $purchasedItems = Item::where('buyer_id', $userId)->get();
+        $purchasedItems = Purchase::with('item')->where('user_id', $userId)->get()
+                        ->map(function($purchase) {
+                            return $purchase->item;
+                        })
+                        ->filter() // null の場合を除外
+                        ->values();
 
         // 出品した商品
         $sellItems = Item::where('user_id', $userId)->get();
 
         // Bladeに両方渡す
         return view('mypage', compact('purchasedItems', 'sellItems'));
-    
     }
 
     public function store(Request $request)
