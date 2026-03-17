@@ -36,11 +36,11 @@ class MypageController extends Controller
         // 購入済み商品
         // $purchasedItems = Item::where('buyer_id', $userId)->get();
         $purchasedItems = Purchase::with('item')->where('user_id', $userId)->get()
-                        ->map(function($purchase) {
-                            return $purchase->item;
-                        })
-                        ->filter() // null の場合を除外
-                        ->values();
+            ->map(function ($purchase) {
+                return $purchase->item;
+            })
+            ->filter() // null の場合を除外
+            ->values();
 
         // 出品した商品
         $sellItems = Item::where('user_id', $userId)->get();
