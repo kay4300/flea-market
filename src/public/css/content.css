@@ -186,6 +186,13 @@
     resize: none;
 }
 
+/* エラーメッセージ */
+.form__error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
 /* コメント送信 */
 .comment-submit {
     width: 100%;

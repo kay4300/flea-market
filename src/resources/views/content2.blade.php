@@ -134,8 +134,13 @@
         <textarea
             maxlength="255"
             placeholder="ログインしてください"
-            class="comment-textarea"
-            disabled></textarea>
+            class="comment-textarea" disabled>
+        </textarea>
+        <div class="form__error">
+            @error('comment')
+            {{ $message }}
+            @enderror
+        </div>
 
         <button class="comment-submit" onclick="showLoginModal()">
             コメントを送信する

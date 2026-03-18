@@ -110,8 +110,8 @@ class PurchaseController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => url('/'),   // とりあえずトップでOK
-            'cancel_url' => url('/'),
+            'success_url' => route('index.afterlogin'),
+            'cancel_url' => route('index.afterlogin'),
             'metadata' => ['item_id' => $item->id],
         ]);
 

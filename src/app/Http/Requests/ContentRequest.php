@@ -25,15 +25,15 @@ class ContentRequest extends FormRequest
     {
         return [
             //
-            'body' => 'required|string|max:255',
+            'comment' => 'required|string|max:255',
         ];
     }
 
     public function messages()
     {
         return [
-            'body.required' => '255文字以内で入力してください',
-            'body.max' => '255文字以内で入力してください',
+            'comment.required' => '255文字以内で入力してください',
+            'comment.max' => '255文字以内で入力してください',
         ];
     }
 }

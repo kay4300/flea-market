@@ -141,7 +141,9 @@ Route::middleware('auth')->group(
 
         // 購入成功画面
         Route::get('/purchase/success', [PurchaseController::class, 'success'])
-            ->name('purchase.success');    
+            ->name('purchase.success');
+        // 購入後indexへ戻る
+        Route::get('/index', [ItemController::class, 'index'])->name('index.afterlogin');    
 
         // 住所変更画面表示
         Route::get('/purchase/{item}/address/edit', [PurchaseController::class, 'editProfile'])->name('address.edit');

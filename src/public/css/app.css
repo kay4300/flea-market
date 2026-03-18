@@ -107,7 +107,7 @@
     /* optional */
 }
 
-.pagination-wrapper .paginate{
+.pagination-wrapper .pagination{
     display: flex !important;
     justify-content: center !important;
     flex-wrap: wrap !important;
@@ -124,6 +124,10 @@
 .pagination-wrapper .page-link {
     display: block !important;
     /* リンクがブロック表示 */
+    padding: 6px 12px;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 /* ===============================

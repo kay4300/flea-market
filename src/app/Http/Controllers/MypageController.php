@@ -28,7 +28,7 @@ class MypageController extends Controller
     //     return view('mypage', compact('sellItems'));
     // }
 
-    // 購入済み商品の表示
+    // マイページの表示
     public function mypage()
     {
         $userId = auth()->id();
