@@ -9,11 +9,9 @@
 
 @section('content')
 
-<div class="pagination-wrapper">
-    {{ $items->appends(['tab' => $tab])->links() }}
-</div>
-
 <!-- 見出し（おすすめ・マイリスト） -->
+
+
 <div class="tab">
     <a href="{{ route('index.afterlogin', ['tab' => 'recommend']) }}"
         class="tab__item {{ request('tab', 'recommend') === 'recommend' ? 'tab__item--active' : '' }}">
@@ -44,8 +42,8 @@
     @endforeach
 </div>
 
-<!-- <div class="pagination-wrapper">
+<div class="pagination-wrapper">
     {{ $items->appends(['tab' => $tab])->links() }}
-</div> -->
+</div>
 
 @endsection
