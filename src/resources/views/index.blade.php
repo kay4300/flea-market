@@ -9,26 +9,9 @@
 
 @section('content')
 
-<!-- ヘッダー -->
-<!-- <header class="header">
-    <div class="header__left">
-        <input
-            type="text"
-            class="header__search"
-            placeholder="何をお探しですか？">
-    </div>
-    <form action="{{ route('login') }}" method="GET">
-        @csrf
-        <button type="submit">ログイン</button>
-    </form>
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit">ログアウト</button>
-    </form>
-
-    <a href="{{ route('mypage') }}">マイページ</a>
-    <a href="{{ route('sell') }}">出品</a>
-</header> -->
+<div class="pagination-wrapper">
+    {{ $items->appends(['tab' => $tab])->links() }}
+</div>
 
 <!-- 見出し（おすすめ・マイリスト） -->
 <div class="tab">
@@ -61,8 +44,8 @@
     @endforeach
 </div>
 
-<div class="pagination-wrapper">
+<!-- <div class="pagination-wrapper">
     {{ $items->appends(['tab' => $tab])->links() }}
-</div>
+</div> -->
 
 @endsection
