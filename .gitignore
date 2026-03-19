@@ -7,6 +7,7 @@ docker/mysql/data/#ib_*
 
 # Laravel
 src/vendor/
+vendor/
 src/storage/*.key
 src/storage/logs/
 src/storage/framework/
