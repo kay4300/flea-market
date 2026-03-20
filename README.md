@@ -84,11 +84,11 @@
 - **データベース:** MySQL  
 
 ### 環境構築
-- **Dockerビルド** 
+- **Dockerビルド**  
     1.git clone:git@github.com:kay4300/flea-market.git  
     2.docker compose up -d --build  
         ＊MySQLはOSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集してください。  
-- **Laravel環境構築** 
+- **Laravel環境構築**  
     1..docker compose exec php bash  
     2.composer install    
     3..env.exampleファイルから.envを作成し環境変数を変更   
