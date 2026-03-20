@@ -26,16 +26,16 @@
             <!-- 未ログインのトップページ専用 -->
             @if($isGuestTop)
             <div class="header__left">
-                <input
-                    type="text"
-                    class="header__search"
-                    placeholder="何をお探しですか？">
+                <form action="{{ route('top') }}" method="GET" class="header__search-wrapper">
+                    <input type="text" name="keyword" class="header__search" placeholder="何をお探しですか？">
+
+                </form>
+
+                <a href="{{ route('login') }}" class="header__login-button">ログイン</a>
             </div>
 
-            <form action="{{ route('login') }}" method="GET">
-                @csrf
-                <button type="submit">ログイン</button>
-            </form>
+
+
             @endif
 
             <!-- 検索バー（全ページ共通なら中央、特定ページだけ表示可） -->
@@ -51,7 +51,7 @@
                 </form>
             </div>
             @endunless
-            
+
             <!-- 右側ナビは特定ページのみ表示 -->
             @if(
             !in_array(Route::currentRouteName(), ['login', 'register', 'mailenable', 'mailverification'])

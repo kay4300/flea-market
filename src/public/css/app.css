@@ -76,6 +76,22 @@
     background: #FF5555;
 }
 
+.header__left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    /* 検索バーとボタンの間隔 */
+}
+
+.header__login-button {
+    padding: 10px 24px;
+    font-size: 16px;
+    background-color: #FF5555;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
 /* ===============================
    登録フォーム全体
 ================================ */
