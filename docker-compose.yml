@@ -16,7 +16,7 @@ services:
     volumes:
       - ./src:/var/www/
     depends_on:
-      - mailhog   # ★ 追加
+      - mailhog   # 追加
 
   mysql:
     image: mysql:8.0.26
