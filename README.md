@@ -27,45 +27,45 @@
 
 ### 機能要件
 - **機能要件一覧**										
-    US001	ユーザーは会員登録ができる	
-    FN001	登録認証機能	使用技術 : fortify
-	FN002	入力フォーム	
-	FN003	バリデーション	"使用技術：formrequest
-	FN004	エラーメッセージ表示
-	FN005	ユーザー認証動線	
-	FN006	初回ログイン時ユーザー設定
-	US002	ユーザーはログインができる	
-    FN007	ログイン認証機能	使用技術 : fortify
-	FN008	入力フォーム	
-	FN009	バリデーション	"使用技術：formrequest
-	FN010	エラーメッセージ表示	
-	FN011	ユーザー認証動線	
-	FN012	メールを用いた認証機能	
-	FN013	認証メール再送機能	
-	US003	ユーザーはログアウトができる	
-    FN013	ログアウト機能	"使用技術：fortify
-	US004	ユーザーは商品一覧の確認ができる	
-    FN014	商品一覧取得	
-	FN015	マイリスト一覧取得	
-	FN016	商品検索機能	
-	US005	ユーザーは商品詳細の確認ができる
-    FN017	商品詳細情報取得	
-	FN018	いいね機能
-	FN019	購入手続き動線	
-	FN020	コメント送信機能	
-	US006	ユーザーは商品を購入することができる
-    FN021	購入前商品情報取得機能	
-	FN022	商品購入機能	
-	FN023	支払い方法選択機能	
-    FN024	配送先変更機能	
-	US007	ユーザーは自身のプロフィールを確認することができる	
-    FN025	ユーザー情報取得	
-	FN026	プロフィール編集動線	
-	US008	ユーザーはプロフィールを編集することができる
-    FN027	ユーザー情報変更機能	
-    US009	ユーザーは商品を出品することができる	
-    FN028	出品商品情報登録機能	
-	FN029	出品商品画像アップロード機能
+    US001	ユーザーは会員登録ができる  
+    FN001	登録認証機能	使用技術 : fortify  
+	FN002	入力フォーム  	
+	FN003	バリデーション	"使用技術：formrequest  
+	FN004	エラーメッセージ表示  
+	FN005	ユーザー認証動線  	
+	FN006	初回ログイン時ユーザー設定  
+	US002	ユーザーはログインができる  
+    FN007	ログイン認証機能	使用技術 : fortify  
+	FN008	入力フォーム  	
+	FN009	バリデーション	"使用技術：formrequest  
+	FN010	エラーメッセージ表示  
+	FN011	ユーザー認証動線  
+	FN012	メールを用いた認証機能  
+	FN013	認証メール再送機能  
+	US003	ユーザーはログアウトができる  
+    FN013	ログアウト機能	"使用技術：fortify  
+	US004	ユーザーは商品一覧の確認ができる  
+    FN014	商品一覧取得  
+	FN015	マイリスト一覧取得  
+	FN016	商品検索機能  
+	US005	ユーザーは商品詳細の確認ができる  
+    FN017	商品詳細情報取得  
+	FN018	いいね機能  
+	FN019	購入手続き動線  
+	FN020	コメント送信機能  
+	US006	ユーザーは商品を購入することができる  
+    FN021	購入前商品情報取得機能  
+	FN022	商品購入機能  
+	FN023	支払い方法選択機能  
+    FN024	配送先変更機能  
+	US007	ユーザーは自身のプロフィールを確認することができる  
+    FN025	ユーザー情報取得  
+	FN026	プロフィール編集動線  	
+	US008	ユーザーはプロフィールを編集することができる  
+    FN027	ユーザー情報変更機能  
+    US009	ユーザーは商品を出品することができる  
+    FN028	出品商品情報登録機能  
+	FN029	出品商品画像アップロード機能  
 
 ---
 
@@ -84,15 +84,17 @@
 - **データベース:** MySQL  
 
 ### 環境構築
-- **Dockerビルド** 1.git clone:git@github.com:kay4300/flea-market.git
-                  2.docker compose up -d --build
-                    ＊MySQLはOSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集してください。
-- **Laravel環境構築** 1..docker compose exec php bash
-                     2.composer install
-                     3..env.exampleファイルから.envを作成し環境変数を変更 
-                     4.php artisan key:generate
-                     5.php artisan migrate
-                     6.php artisan db:seed                 
+- **Dockerビルド** 
+    1.git clone:git@github.com:kay4300/flea-market.git  
+    2.docker compose up -d --build  
+        ＊MySQLはOSによって起動しない場合があるのでそれぞれのPCに合わせてdocker-compose.ymlファイルを編集してください。  
+- **Laravel環境構築** 
+    1..docker compose exec php bash  
+    2.composer install    
+    3..env.exampleファイルから.envを作成し環境変数を変更   
+    4.php artisan key:generate  
+    5.php artisan migrate  
+    6.php artisan db:seed                 
 
 ---
 
