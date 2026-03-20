@@ -41,15 +41,7 @@
                 <span class="form__label--item">カテゴリー</span>
             </div>
         </div>
-        <!-- @php
-            $categories = [
-            'ファッション', '家電', 'インテリア', 'レディース', 'メンズ',
-            'コスメ', '本', 'ゲーム', 'スポーツ', 'キッチン',
-            'ハンドメイド', 'アクセサリー', 'おもちゃ', 'ベビー・キッズ'
-            ];
-            $selectedCategories = old('categories', []);
-            @endphp -->
-        <!-- DBから全カテゴリーを取得 -->
+        
         @php
         $allCategories = \App\Models\Category::all();
         $selectedCategories = old('categories', []);

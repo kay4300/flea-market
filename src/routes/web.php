@@ -39,16 +39,11 @@ Route::post('/email/verification-notification', [EmailVerifiedRedirectController
 // メール認証後リダイレクト
 Route::get('/email/verified-redirect', [EmailVerifiedRedirectController::class, 'redirect'])
     ->name('verification.redirect');
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
-
-//     return back()->with('status', 'verification-link-sent');
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 // 登録済みならindexへ
 Route::get('/index', function () {
     return view('index');
-    // return redirect()->route('index.afterlogin');
+    
 })->middleware(['auth', 'signed'])->name('index.afterlogin');
 
 Route::get('/after-verify', [EmailVerifiedRedirectController::class, 'redirect'])
@@ -61,20 +56,7 @@ Route::middleware('auth')->group(
 
         Route::post('/verified/redirect', function (Request $request) {
 
-            // $user = $request->user();
-
-            // // ユーザーをメール認証済みにする
-            // if (!$user->hasVerifiedEmail()) {
-            //     $user->markEmailAsVerified();
-            // }
-
-            // Eager Load で profile を確認
-            // $user->load('profile');
-
-            // プロフィール未登録なら makeprofile へ
-            // if (!$user->profile) {
-            //     return redirect()->route('makeprofile.create');
-            // }
+            
             $request->fulfill();
 
             $user = $request->user();
@@ -103,16 +85,11 @@ Route::middleware('auth')->group(
         // コメント保存
         Route::post('/item/{item}/comment', [ItemController::class, 'store'])->name('items.comment');
 
-
         // プロフィール登録・入力フォーム表示
         Route::get('/makeprofile', [MakeProfileController::class, 'create'])->name('makeprofile.create');
         // プロフィール初回登録・フォーム送信
         Route::post('/makeprofile', [MakeProfileController::class, 'store'])->name('makeprofile.store');
-        // index 画面
-        // Route::get('/index', function () {
-        //     return view('index');
-        // })->name('index.afterlogin');
-
+        
         // プロフィール編集・編集画面表示
         Route::get('/profile/edit', [MakeProfileController::class, 'edit'])->name('profile.edit');
         // プロフィール画面・フォーム送信   
@@ -166,22 +143,10 @@ Route::get('/', [ItemController::class, 'index'])->name('top');
 // ログイン画面へ遷移
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 
-// Route::get('/index', function (Request $request) {
-//     $tab = $request->query('tab', 'recommend');
-//     $items = Item::latest()->take(3)->get();
-//     return view('index', compact('items', 'tab'));
-// })->name('index.afterlogin');
-
 
 // 未ログイン画面からコメント送信したときのエラー処理
 Route::post('/content2', [ItemController::class, 'store'])
     ->middleware('auth');
-
-
-// Route::middleware(['web', 'guest'])->group(function () {
-//     Route::get('/register', [RegisterController::class, 'create'])->name('register');
-//     Route::post('/register', [RegisterController::class, 'store']);
-// });
 
 
 /*

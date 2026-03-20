@@ -19,13 +19,6 @@ class MakeProfileController extends Controller
         return view('makeprofile', compact('profile'));
     }
 
-    //     // 既存プロフィールがあれば取得、なければ新規作成用の空オブジェクト
-    //     $profile = Profile::firstOrNew([
-    //         'user_id' => $user->id
-    //     ]);
-
-    //     return view('makeprofile', compact('profile'));
-    // }
     // プロフィール更新
     public function store(MakeProfileRequest $request)
     {

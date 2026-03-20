@@ -118,19 +118,7 @@ class ItemController extends Controller
 
         return view('sell', compact('uploadedImage'));
     }
-    // storage/app/public/items のファイル一覧
-    // $files = Storage::files('public/items');
-
-    // $images = [];
-    // foreach ($files as $file) {
-    //     $images[] = [
-    //         'url' => asset(str_replace('public/', 'storage/', $file)), // 表示用URL
-    //         'name' => basename($file), // ファイル名
-    //     ];
-    // }
-
-    // return view('sell', compact('images'));
-    // return view('sell');
+    
     public function uploadImage(Request $request)
     {
         $request->validate([
